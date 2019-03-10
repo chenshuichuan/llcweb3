@@ -63,7 +63,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:images:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:images:remove')}]];
-        var datas = [[${@dict.getType('user_yes_no')}]];
+        var types = [[${@dict.getType('sys_file_type')}]];
+
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/images";
 
@@ -87,18 +88,35 @@
 				},
 				{
 					field : 'url', 
-					title : '完整url',
-					sortable: true
-				},
-				{
-					field : 'status', 
-					title : '状态',
-					sortable: true
+					title : '文件',
+                    width:"200px",
+                    height:"100px",
+                    align: 'center',
+                    formatter:function(value,row,index) {
+                        var s;
+                        if (row.url != null) {
+                            var url ="/profile/images/" +  row.fileName+"."+row.suffix;
+                            if(row.type == "1") {//视频
+                                s = '<video controls="controls" height="100px" width="200px" name="vi"> <source  type="video/mp4" src="'+url+'"/>Your browser does not support the video tag.</video>';
+                            }else if(row.type == "0"){
+                                s = '<a class = "view"  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + url + '" /></a>';
+                            }else{
+                                s='<a  style="width:200px;height:100px; text-align: center"> '+row.fileName+'</a>'
+                            }
+                        }
+                        return s;
+                    }
 				},
 				{
 					field : 'fileName', 
 					title : '文件名称',
-					sortable: true
+                    formatter:function(value,row,index) {
+                        var s;
+                        if (row.url != null) {
+                            s='<a href="/admin/llc/images/getFileById?id='+row.id+'" style="width:200px;height:100px; text-align: center"> '+row.fileName+'</a>'
+                        }
+                        return s;
+                    }
 				},
 				{
 					field : 'originalName', 
@@ -108,12 +126,7 @@
 				{
 					field : 'remark', 
 					title : '注释',
-					sortable: true
-				},
-				{
-					field : 'content', 
-					title : '文字内容',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'suffix', 
@@ -123,7 +136,10 @@
 				{
 					field : 'type', 
 					title : '文件类型',
-					sortable: true
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return $.table.selectDictLabel(types, value);
+                    }
 				},
 				{
 					field : 'author', 
@@ -133,11 +149,6 @@
 				{
 					field : 'createTime', 
 					title : '创建时间',
-					sortable: true
-				},
-				{
-					field : 'updateTime', 
-					title : '更新时间',
 					sortable: true
 				},
 		        {

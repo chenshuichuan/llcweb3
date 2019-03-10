@@ -1,6 +1,8 @@
 package com.ruoyi.project.llc.images.service;
 
 import java.util.List;
+
+import com.ruoyi.common.constant.UserConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.llc.images.mapper.ImagesMapper;
@@ -79,5 +81,13 @@ public class ImagesServiceImpl implements IImagesService
 	{
 		return imagesMapper.deleteImagesByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public String checkFileNameUnqiue(Images files) {
+		List<Images> filesList = imagesMapper.selectImagesList(files);
+		if (filesList != null && filesList.size() > 0) {
+			return UserConstants.DEPT_NAME_NOT_UNIQUE;
+		}
+		return UserConstants.DEPT_NAME_UNIQUE;
+	}
 }

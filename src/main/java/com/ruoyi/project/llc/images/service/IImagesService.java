@@ -50,5 +50,6 @@ public interface IImagesService
      * @return 结果
      */
 	public int deleteImagesByIds(String ids);
-	
+
+	String checkFileNameUnqiue(Images files);
 }
