@@ -55,6 +55,10 @@ public class Comments extends BaseEntity {
     @Column(name = "ip_address" )
     private String ipAddress;
 
+    public Comments() {this.createTime = new Date();
+
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

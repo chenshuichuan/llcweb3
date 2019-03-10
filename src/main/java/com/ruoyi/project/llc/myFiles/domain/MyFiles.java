@@ -1,4 +1,4 @@
-package com.ruoyi.project.llc.files.domain;
+package com.ruoyi.project.llc.myFiles.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -9,13 +9,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 文件上传表 llc_files
+ * 文件上传表 llc_my_files
  *
  * @author ricardo
- * @date 2019-03-09
+ * @date 2019-03-10
  */
 @Entity
-@Table(name = "llc_files" )
+@Table(name = "llc_my_files" )
 public class MyFiles extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -37,12 +37,12 @@ public class MyFiles extends BaseEntity {
     /**
      * 文件名称
      */
-    @Column(name = "file_name" )
+    @Column(name = "fileName" )
     private String fileName;
     /**
      * 原始名称
      */
-    @Column(name = "original_name" )
+    @Column(name = "originalName" )
     private String originalName;
     /**
      * 注释
@@ -72,13 +72,17 @@ public class MyFiles extends BaseEntity {
     /**
      * 创建时间
      */
-    @Column(name = "create_time" )
+    @Column(name = "createTime" )
     private Date createTime;
     /**
      * 更新时间
      */
-    @Column(name = "update_time" )
+    @Column(name = "updateTime" )
     private Date updateTime;
+
+    public MyFiles() {
+        this.updateTime = new Date();
+    }
 
     public void setId(Integer id) {
         this.id = id;

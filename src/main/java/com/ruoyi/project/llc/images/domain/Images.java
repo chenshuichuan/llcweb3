@@ -80,6 +80,10 @@ public class Images extends BaseEntity {
     @Column(name = "update_time" )
     private Date updateTime;
 
+    public Images() {
+        this.updateTime = new Date();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

@@ -92,6 +92,10 @@ public class People extends BaseEntity {
     @Column(name = "update_time" )
     private Date updateTime;
 
+    public People() {
+        this.updateTime = new Date();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

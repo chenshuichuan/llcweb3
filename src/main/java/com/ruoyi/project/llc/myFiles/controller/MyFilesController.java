@@ -1,4 +1,4 @@
-package com.ruoyi.project.llc.files.controller;
+package com.ruoyi.project.llc.myFiles.controller;
 
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ruoyi.framework.aspectj.lang.annotation.Log;
 import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.llc.files.domain.MyFiles;
-import com.ruoyi.project.llc.files.service.IMyFilesService;
+import com.ruoyi.project.llc.myFiles.domain.MyFiles;
+import com.ruoyi.project.llc.myFiles.service.IMyFilesService;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.framework.web.domain.AjaxResult;
@@ -23,34 +23,34 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * 文件上传 信息操作处理
  * 
  * @author ricardo
- * @date 2019-03-09
+ * @date 2019-03-10
  */
 @Controller
-@RequestMapping("/admin/llc/files")
+@RequestMapping("/admin/llc/myFiles")
 public class MyFilesController extends BaseController
 {
-    private String prefix = "llc/files";
+    private String prefix = "llc/myFiles";
 	
 	@Autowired
-	private IMyFilesService filesService;
+	private IMyFilesService myFilesService;
 	
-	@RequiresPermissions("llc:files:view")
+	@RequiresPermissions("llc:myFiles:view")
 	@GetMapping()
-	public String files()
+	public String myFiles()
 	{
-	    return prefix + "/files";
+	    return prefix + "/myFiles";
 	}
 	
 	/**
 	 * 查询文件上传列表
 	 */
-	@RequiresPermissions("llc:files:list")
+	@RequiresPermissions("llc:myFiles:list")
 	@PostMapping("/list")
 	@ResponseBody
-	public TableDataInfo list(MyFiles files)
+	public TableDataInfo list(MyFiles myFiles)
 	{
 		startPage();
-        List<MyFiles> list = filesService.selectFilesList(files);
+        List<MyFiles> list = myFilesService.selectMyFilesList(myFiles);
 		return getDataTable(list);
 	}
 	
@@ -58,14 +58,14 @@ public class MyFilesController extends BaseController
 	/**
 	 * 导出文件上传列表
 	 */
-	@RequiresPermissions("llc:files:export")
+	@RequiresPermissions("llc:myFiles:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(MyFiles files)
+    public AjaxResult export(MyFiles myFiles)
     {
-    	List<MyFiles> list = filesService.selectFilesList(files);
+    	List<MyFiles> list = myFilesService.selectMyFilesList(myFiles);
         ExcelUtil<MyFiles> util = new ExcelUtil<MyFiles>(MyFiles.class);
-        return util.exportExcel(list, "files");
+        return util.exportExcel(list, "myFiles");
     }
 	
 	/**
@@ -80,13 +80,13 @@ public class MyFilesController extends BaseController
 	/**
 	 * 新增保存文件上传
 	 */
-	@RequiresPermissions("llc:files:add")
+	@RequiresPermissions("llc:myFiles:add")
 	@Log(title = "文件上传", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(MyFiles files)
+	public AjaxResult addSave(MyFiles myFiles)
 	{		
-		return toAjax(filesService.insertFiles(files));
+		return toAjax(myFilesService.insertMyFiles(myFiles));
 	}
 
 	/**
@@ -95,33 +95,33 @@ public class MyFilesController extends BaseController
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
 	{
-		MyFiles files = filesService.selectFilesById(id);
-		mmap.put("files", files);
+		MyFiles myFiles = myFilesService.selectMyFilesById(id);
+		mmap.put("myFiles", myFiles);
 	    return prefix + "/edit";
 	}
 	
 	/**
 	 * 修改保存文件上传
 	 */
-	@RequiresPermissions("llc:files:edit")
+	@RequiresPermissions("llc:myFiles:edit")
 	@Log(title = "文件上传", businessType = BusinessType.UPDATE)
 	@PostMapping("/edit")
 	@ResponseBody
-	public AjaxResult editSave(MyFiles files)
+	public AjaxResult editSave(MyFiles myFiles)
 	{		
-		return toAjax(filesService.updateFiles(files));
+		return toAjax(myFilesService.updateMyFiles(myFiles));
 	}
 	
 	/**
 	 * 删除文件上传
 	 */
-	@RequiresPermissions("llc:files:remove")
+	@RequiresPermissions("llc:myFiles:remove")
 	@Log(title = "文件上传", businessType = BusinessType.DELETE)
 	@PostMapping( "/remove")
 	@ResponseBody
 	public AjaxResult remove(String ids)
 	{		
-		return toAjax(filesService.deleteFilesByIds(ids));
+		return toAjax(myFilesService.deleteMyFilesByIds(ids));
 	}
 	
 }

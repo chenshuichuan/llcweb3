@@ -13,55 +13,29 @@
 							<li>
 								姓名：<input type="text" name="name"/>
 							</li>
-
 							<li>
-								手机号：<input type="text" name="phone"/>
+								职位：
+								<select id="position" name="position"  th:with="type=${@dict.getType('user_people_position')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
 							<li>
-								y邮箱：<input type="text" name="email"/>
+								年份：<input type="text" name="grade"/>
 							</li>
-
-							<li>
-								人物头像图片路径，关联image表：<input type="text" name="portrait"/>
-							</li>
-
-							<li>
-								职位，教授、副教授、讲师、博士后、博士、硕士，本科生：<input type="text" name="position"/>
-							</li>
-
-							<li>
-								关联document表：<input type="text" name="introduction"/>
-							</li>
-
-							<li>
-								本科生、硕士生、博士生是届数；讲师，教授，等是加入年份：<input type="text" name="grade"/>
-							</li>
-
 							<li>
 								研究方向：<input type="text" name="researchField"/>
 							</li>
-
-							<li>
-								学术头衔：<input type="text" name="academicTitle"/>
-							</li>
-
-							<li>
-								行政职务：<input type="text" name="adminPosition"/>
-							</li>
-
 							<li>
 								最高学历：<input type="text" name="highestDegree"/>
 							</li>
-
 							<li>
 								性别：<input type="text" name="sex"/>
+								<select id="sex" name="sex"  th:with="type=${@dict.getType('sys_user_sex')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -94,6 +68,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:people:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:people:remove')}]];
+        var datas = [[${@dict.getType('user_people_position')}]];
+        var sexs = [[${@dict.getType('user_people_sex')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/people";
 
@@ -127,27 +103,30 @@
 				},
 				{
 					field : 'email', 
-					title : 'y邮箱',
+					title : '邮箱',
 					sortable: true
 				},
 				{
 					field : 'portrait', 
-					title : '人物头像图片路径，关联image表',
+					title : '头像',
 					sortable: true
 				},
 				{
 					field : 'position', 
-					title : '职位，教授、副教授、讲师、博士后、博士、硕士，本科生',
-					sortable: true
+					title : '职位',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'introduction', 
-					title : '关联document表',
+					title : '简介',
 					sortable: true
 				},
 				{
 					field : 'grade', 
-					title : '本科生、硕士生、博士生是届数；讲师，教授，等是加入年份',
+					title : '年级',
 					sortable: true
 				},
 				{
@@ -158,12 +137,12 @@
 				{
 					field : 'academicTitle', 
 					title : '学术头衔',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'adminPosition', 
 					title : '行政职务',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'highestDegree', 
@@ -173,7 +152,11 @@
 				{
 					field : 'sex', 
 					title : '性别',
-					sortable: true
+					sortable: true,
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(sexs, value);
+                    }
 				},
 				{
 					field : 'updateTime', 

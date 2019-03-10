@@ -13,39 +13,13 @@
 							<li>
 								平台名称：<input type="text" name="name"/>
 							</li>
-
 							<li>
-								平台转跳地址：<input type="text" name="address"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								平台介绍视频：<input type="text" name="videoAddress"/>
-							</li>
-
-							<li>
-								j介绍封面图片：<input type="text" name="coverImage"/>
-							</li>
-
-							<li>
-								：<input type="text" name="date"/>
-							</li>
-
-							<li>
-								平台介绍文档：<input type="text" name="introduction"/>
-							</li>
-
-							<li>
-								p平台介绍PDF文件：<input type="text" name="pdfFile"/>
-							</li>
-
-							<li>
-								是否发布：<input type="text" name="isPublish"/>
-							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -78,6 +52,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:platform:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:platform:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/platform";
 
@@ -116,7 +91,7 @@
 				},
 				{
 					field : 'coverImage', 
-					title : 'j介绍封面图片',
+					title : '介绍封面图片',
 					sortable: true
 				},
 				{
@@ -137,7 +112,10 @@
 				{
 					field : 'isPublish', 
 					title : '是否发布',
-					sortable: true
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'updateTime', 

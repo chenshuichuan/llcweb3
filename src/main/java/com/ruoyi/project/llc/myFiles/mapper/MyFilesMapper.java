@@ -1,15 +1,15 @@
-package com.ruoyi.project.llc.files.mapper;
+package com.ruoyi.project.llc.myFiles.mapper;
 
-import com.ruoyi.project.llc.files.domain.MyFiles;
+import com.ruoyi.project.llc.myFiles.domain.MyFiles;
 import java.util.List;	
 
 /**
  * 文件上传 数据层
  * 
  * @author ricardo
- * @date 2019-03-09
+ * @date 2019-03-10
  */
-public interface MyFilesMapper
+public interface MyFilesMapper 
 {
 	/**
      * 查询文件上传信息
@@ -17,31 +17,31 @@ public interface MyFilesMapper
      * @param id 文件上传ID
      * @return 文件上传信息
      */
-	public MyFiles selectFilesById(Integer id);
+	public MyFiles selectMyFilesById(Integer id);
 	
 	/**
      * 查询文件上传列表
      * 
-     * @param files 文件上传信息
+     * @param myFiles 文件上传信息
      * @return 文件上传集合
      */
-	public List<MyFiles> selectFilesList(MyFiles files);
+	public List<MyFiles> selectMyFilesList(MyFiles myFiles);
 	
 	/**
      * 新增文件上传
      * 
-     * @param files 文件上传信息
+     * @param myFiles 文件上传信息
      * @return 结果
      */
-	public int insertFiles(MyFiles files);
+	public int insertMyFiles(MyFiles myFiles);
 	
 	/**
      * 修改文件上传
      * 
-     * @param files 文件上传信息
+     * @param myFiles 文件上传信息
      * @return 结果
      */
-	public int updateFiles(MyFiles files);
+	public int updateMyFiles(MyFiles myFiles);
 	
 	/**
      * 删除文件上传
@@ -49,7 +49,7 @@ public interface MyFilesMapper
      * @param id 文件上传ID
      * @return 结果
      */
-	public int deleteFilesById(Integer id);
+	public int deleteMyFilesById(Integer id);
 	
 	/**
      * 批量删除文件上传
@@ -57,6 +57,6 @@ public interface MyFilesMapper
      * @param ids 需要删除的数据ID
      * @return 结果
      */
-	public int deleteFilesByIds(String[] ids);
+	public int deleteMyFilesByIds(String[] ids);
 	
 }

@@ -13,55 +13,19 @@
 							<li>
 								名称：<input type="text" name="title"/>
 							</li>
-
 							<li>
-								申请日：<input type="text" name="appliDate"/>
+								发明人：<input type="text" name="authorList"/>
 							</li>
-
-							<li>
-								摘要：<input type="text" name="introduction"/>
-							</li>
-
-							<li>
-								发明人列表：<input type="text" name="authorList"/>
-							</li>
-
-							<li>
-								关联的文件id：<input type="text" name="sourceFile"/>
-							</li>
-
-							<li>
-								所属项目：<input type="text" name="belongProject"/>
-							</li>
-
-							<li>
-								公开号：<input type="text" name="publicNum"/>
-							</li>
-
-							<li>
-								公开日：<input type="text" name="publicDate"/>
-							</li>
-
 							<li>
 								状态：<input type="text" name="status"/>
 							</li>
-
 							<li>
-								权利取得方式：<input type="text" name="publicMethod"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								权利范围：<input type="text" name="rightRange"/>
-							</li>
-
-							<li>
-								是否发布：<input type="text" name="isPublish"/>
-							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -94,6 +58,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:software:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:software:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/software";
 
@@ -173,7 +138,10 @@
 				{
 					field : 'isPublish', 
 					title : '是否发布',
-					sortable: true
+					align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'updateTime', 

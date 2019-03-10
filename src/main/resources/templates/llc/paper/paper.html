@@ -13,55 +13,32 @@
 							<li>
 								题目：<input type="text" name="title"/>
 							</li>
-
 							<li>
-								发表日期：<input type="text" name="publicDate"/>
+								作者：<input type="text" name="authorList"/>
 							</li>
-
-							<li>
-								论文介绍：<input type="text" name="introduction"/>
-							</li>
-
-							<li>
-								作者列表：<input type="text" name="authorList"/>
-							</li>
-
-							<li>
-								原文链接：<input type="text" name="originalLink"/>
-							</li>
-
-							<li>
-								论文文件：<input type="text" name="sourceFile"/>
-							</li>
-
-							<li>
-								所属项目id：<input type="text" name="belongProject"/>
-							</li>
-
 							<li>
 								发表期刊：<input type="text" name="periodical"/>
 							</li>
-
 							<li>
 								期刊类别：<input type="text" name="periodicalType"/>
 							</li>
-
 							<li>
 								当前状态：<input type="text" name="state"/>
 							</li>
-
 							<li>
-								项目组：<input type="text" name="model"/>
+								项目组：
+								<select id="model" name="model"  th:with="type=${@dict.getType('user_models')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
 							<li>
-								是否发布：<input type="text" name="isPublish"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -95,6 +72,7 @@
         var editFlag = [[${@permission.hasPermi('llc:paper:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:paper:remove')}]];
         ctx = ctx + webPrefix+"/";
+        var datas = [[${@dict.getType('user_yes_no')}]];
         var prefix = ctx + "llc/paper";
 
         $(function() {
@@ -147,7 +125,7 @@
 				},
 				{
 					field : 'belongProject', 
-					title : '所属项目id',
+					title : '所属项目',
 					sortable: true
 				},
 				{
@@ -168,17 +146,21 @@
 				{
 					field : 'model', 
 					title : '项目组',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'isPublish', 
 					title : '是否发布',
-					sortable: true
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true
+                    visible: false
 				},
 		        {
 		            title: '操作',

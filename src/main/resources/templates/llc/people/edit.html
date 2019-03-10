@@ -19,31 +19,33 @@
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">y邮箱：</label>
+				<label class="col-sm-3 control-label">邮箱：</label>
 				<div class="col-sm-8">
 					<input id="email" name="email" th:field="*{email}" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">人物头像图片路径，关联image表：</label>
+				<label class="col-sm-3 control-label">人物头像：</label>
 				<div class="col-sm-8">
-					<input id="portrait" name="portrait" th:field="*{portrait}" class="form-control" type="text">
+					<input id="portrait" name="portrait" th:field="*{portrait}" class="form-control" type="text" placeholder="头像要求长宽比：1 : 1.2">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">职位：</label>
+				<div class="col-sm-8">
+					<select id="position" name="position" class="form-control" th:field="*{position}" th:with="type=${@dict.getType('user_people_position')}">
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">职位，教授、副教授、讲师、博士后、博士、硕士，本科生：</label>
-				<div class="col-sm-8">
-					<input id="position" name="position" th:field="*{position}" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">关联document表：</label>
+				<label class="col-sm-3 control-label">简介：</label>
 				<div class="col-sm-8">
 					<input id="introduction" name="introduction" th:field="*{introduction}" class="form-control" type="text">
 				</div>
 			</div>
 			<div class="form-group">	
-				<label class="col-sm-3 control-label">本科生、硕士生、博士生是届数；讲师，教授，等是加入年份：</label>
+				<label class="col-sm-3 control-label">年份：</label>
 				<div class="col-sm-8">
 					<input id="grade" name="grade" th:field="*{grade}" class="form-control" type="text">
 				</div>
@@ -72,24 +74,20 @@
 					<input id="highestDegree" name="highestDegree" th:field="*{highestDegree}" class="form-control" type="text">
 				</div>
 			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">性别：</label>
-				<div class="col-sm-8">
-					<input id="sex" name="sex" th:field="*{sex}" class="form-control" type="text">
-				</div>
-			</div>
-			<div class="form-group">	
-				<label class="col-sm-3 control-label">更新时间：</label>
-				<div class="col-sm-8">
-					<input id="updateTime" name="updateTime" th:field="*{updateTime}" class="form-control" type="text">
-				</div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="col-sm-8">
+                    <select id="sex" name="sex" class="form-control"  th:field="*{sex}" th:with="type=${@dict.getType('sys_user_sex')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
 			</div>
 		</form>
     </div>
     <div th:include="include::footer"></div>
     <script type="text/javascript">
         ctx = ctx + webPrefix+"/";
-		var prefix = ctx + "llc/people"
+		var prefix = ctx + "llc/people";
 		$("#form-people-edit").validate({
 			rules:{
 				xxxx:{

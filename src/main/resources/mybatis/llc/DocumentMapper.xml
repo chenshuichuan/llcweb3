@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </where>
     </select>
     
-    <select id="selectDocumentById" parameterType="Long" resultMap="DocumentResult">
+    <select id="selectDocumentById" parameterType="Integer" resultMap="DocumentResult">
         <include refid="selectDocumentVo"/>
         where id = #{id}
     </select>
@@ -76,7 +76,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-	<delete id="deleteDocumentById" parameterType="Long">
+	<delete id="deleteDocumentById" parameterType="Integer">
         delete from llc_document where id = #{id}
     </delete>
 	

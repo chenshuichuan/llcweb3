@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="undertakeUnit"    column="undertake_unit"    />
         <result property="isPublish"    column="is_publish"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="team"    column="team"    />
     </resultMap>
 	
 	<sql id="selectProjectVo">

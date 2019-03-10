@@ -74,6 +74,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:document1:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:document1:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/document1";
 

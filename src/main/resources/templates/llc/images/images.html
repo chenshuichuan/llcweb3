@@ -11,49 +11,26 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								完整url：<input type="text" name="url"/>
-							</li>
-
-							<li>
 								状态：<input type="text" name="status"/>
 							</li>
-
 							<li>
 								文件名称：<input type="text" name="fileName"/>
 							</li>
-
 							<li>
 								原始名称：<input type="text" name="originalName"/>
 							</li>
-
 							<li>
 								注释：<input type="text" name="remark"/>
 							</li>
-
-							<li>
-								文字内容：<input type="text" name="content"/>
-							</li>
-
 							<li>
 								后缀：<input type="text" name="suffix"/>
 							</li>
-
 							<li>
 								文件类型：<input type="text" name="type"/>
 							</li>
-
 							<li>
 								创建者：<input type="text" name="author"/>
 							</li>
-
-							<li>
-								创建时间：<input type="text" name="createTime"/>
-							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -86,6 +63,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:images:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:images:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/images";
 

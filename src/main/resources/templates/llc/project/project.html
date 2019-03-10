@@ -13,79 +13,38 @@
 							<li>
 								项目名称：<input type="text" name="name"/>
 							</li>
-
 							<li>
 								项目编号：<input type="text" name="requireNum"/>
 							</li>
-
-							<li>
-								项目介绍：<input type="text" name="introduction"/>
-							</li>
-
-							<li>
-								介绍文件：<input type="text" name="introductionFile"/>
-							</li>
-
-							<li>
-								项目状态：<input type="text" name="status"/>
-							</li>
-
 							<li>
 								研究领域：<input type="text" name="researchField"/>
 							</li>
-
-							<li>
-								项目经费：<input type="text" name="money"/>
+							<li class="select-time">
+								<label>开始时间： </label>
+								<input type="text" class="time-input" id="startDate" placeholder="开始" name="startDate"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endDate" placeholder="结束" name="endDate"/>
 							</li>
-
-							<li>
-								开始时间：<input type="text" name="startDate"/>
-							</li>
-
-							<li>
-								结束时间：<input type="text" name="endDate"/>
-							</li>
-
-							<li>
-								项目负责人：<input type="text" name="responsiblePerson"/>
-							</li>
-
 							<li>
 								项目类型：<input type="text" name="projectType"/>
 							</li>
-
 							<li>
-								项目人员：<input type="text" name="members"/>
+								项目类别：
+								<select id="team" name="team"  th:with="type=${@dict.getType('user_project_type')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
 							<li>
 								项目描述：<input type="text" name="projectDes"/>
 							</li>
-
 							<li>
-								项目目标：<input type="text" name="projectAim"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								主办单位：<input type="text" name="hostUnit"/>
-							</li>
-
-							<li>
-								协办单位：<input type="text" name="coUnit"/>
-							</li>
-
-							<li>
-								承办单位：<input type="text" name="undertakeUnit"/>
-							</li>
-
-							<li>
-								是否发布：<input type="text" name="isPublish"/>
-							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -118,6 +77,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:project:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:project:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/project";
 
@@ -187,47 +147,52 @@
 				{
 					field : 'responsiblePerson', 
 					title : '项目负责人',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'projectType', 
-					title : '项目类型',
-					sortable: true
+					title : '项目类型'
 				},
 				{
 					field : 'members', 
-					title : '项目人员',
-					sortable: true
+					title : '项目人员'
 				},
 				{
 					field : 'projectDes', 
-					title : '项目描述',
-					sortable: true
+					title : '项目描述'
 				},
 				{
 					field : 'projectAim', 
 					title : '项目目标',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'hostUnit', 
 					title : '主办单位',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'coUnit', 
 					title : '协办单位',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'undertakeUnit', 
 					title : '承办单位',
-					sortable: true
+                    visible: false
 				},
+                    {
+                        field : 'team',
+                        title : '项目类别',
+                        visible: false
+                    },
 				{
 					field : 'isPublish', 
 					title : '是否发布',
-					sortable: true
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'updateTime', 

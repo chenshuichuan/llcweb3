@@ -110,6 +110,10 @@ public class Patent extends BaseEntity {
     @Column(name = "update_time" )
     private Date updateTime;
 
+    public Patent() {
+        this.updateTime = new Date();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

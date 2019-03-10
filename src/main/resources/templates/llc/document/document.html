@@ -13,29 +13,28 @@
 							<li>
 								标题：<input type="text" name="title"/>
 							</li>
-
 							<li>
-								作者名称：<input type="text" name="author"/>
+								作者：<input type="text" name="author"/>
 							</li>
-
-							<li>
-								内容：<input type="text" name="content"/>
-							</li>
-
+							<!--<li>-->
+								<!--内容：<input type="text" name="content"/>-->
+							<!--</li>-->
 							<li>
 								文档注释：<input type="text" name="infor"/>
 							</li>
-
 							<li>
-								组别：<input type="text" name="model"/>
+								组别：
+								<select id="model" name="model"  th:with="type=${@dict.getType('user_models')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
-							<li>
-								创建时间：<input type="text" name="createTime"/>
-							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
+							<li class="select-time">
+								<label>时间： </label>
+								<input type="text" class="time-input" id="startDate" placeholder="开始时间" name="createTime"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endDate" placeholder="结束时间" name="updateTime"/>
 							</li>
 
 							<li>
@@ -70,6 +69,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:document:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:document:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/document";
 
@@ -88,8 +88,7 @@
 		        },
 				{
 					field : 'id', 
-					title : '文档id',
-					visible: false
+					title : 'id'
 				},
 				{
 					field : 'title', 
@@ -99,11 +98,6 @@
 				{
 					field : 'author', 
 					title : '作者名称',
-					sortable: true
-				},
-				{
-					field : 'content', 
-					title : '内容',
 					sortable: true
 				},
 				{

@@ -92,6 +92,10 @@ public class Software extends BaseEntity {
     @Column(name = "update_time" )
     private Date updateTime;
 
+    public Software() {
+        this.updateTime = new Date();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

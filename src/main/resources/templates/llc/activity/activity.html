@@ -13,37 +13,35 @@
 							<li>
 								活动名称：<input type="text" name="name"/>
 							</li>
-
-							<li>
-								活动发布者：<input type="text" name="author"/>
-							</li>
-
 							<li>
 								活动参与者：<input type="text" name="peopleList"/>
 							</li>
-
-							<li>
-								开始时间：<input type="text" name="startDate"/>
+							<li class="select-time">
+								<label>时间： </label>
+								<input type="text" class="time-input" id="startDate" placeholder="开始时间" name="startDate"/>
+								<span>-</span>
+								<input type="text" class="time-input" id="endDate" placeholder="结束时间" name="endDate"/>
 							</li>
-
 							<li>
-								结束时间：<input type="text" name="endDate"/>
+								组别：
+								<select id="model" name="model"  th:with="type=${@dict.getType('user_models')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
 							<li>
-								活动简介：<input type="text" name="introduction"/>
+								活动类型：
+								<select id="activityType" name="activityType"  th:with="type=${@dict.getType('user_activity_type')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
 							<li>
-								组别：<input type="text" name="model"/>
-							</li>
-
-							<li>
-								活动类型,通知、会议、招聘、活动等：<input type="text" name="activityType"/>
-							</li>
-
-							<li>
-								是否发布出去：<input type="text" name="isPublish"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
 							<li>
@@ -78,6 +76,10 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:activity:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:activity:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
+        var models = [[${@dict.getType('user_models')}]];
+        var activityTypes = [[${@dict.getType('user_activity_type')}]];
+
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/activity";
 
@@ -101,23 +103,24 @@
 				},
 				{
 					field : 'name', 
-					title : '活动名称',
-					sortable: true
+					title : '名称'
 				},
 				{
 					field : 'author', 
-					title : '活动发布者',
+					title : '作者',
 					sortable: true
 				},
 				{
 					field : 'peopleList', 
-					title : '活动参与者',
-					sortable: true
+					title : '参与者人员'
 				},
 				{
 					field : 'startDate', 
 					title : '开始时间',
-					sortable: true
+					sortable: true,
+                    formatter: function(value, row, index) {
+                        return Format(row.startDate,"yyyy-MM-dd hh:mm:ss");
+                    }
 				},
 				{
 					field : 'endDate', 
@@ -126,23 +129,34 @@
 				},
 				{
 					field : 'introduction', 
-					title : '活动简介',
-					sortable: true
+					title : '简介',
+                    visible: false
 				},
 				{
 					field : 'model', 
 					title : '组别',
-					sortable: true
+					sortable: true,
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(models, value);
+                    }
 				},
 				{
 					field : 'activityType', 
-					title : '活动类型,通知、会议、招聘、活动等',
-					sortable: true
+					title : '类型',
+					sortable: true,
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(activityTypes, value);
+                    }
 				},
 				{
 					field : 'isPublish', 
-					title : '是否发布出去',
-					sortable: true
+					title : '是否发布',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 		        {
 		            title: '操作',
@@ -157,6 +171,33 @@
             };
             $.table.init(options);
         });
+        //js新建格式化函数
+        //返回的是对应fmt时间格式的字符串
+        function Format(datetime,fmt) {
+            if (parseInt(datetime)==datetime) {
+                if (datetime.length==10) {
+                    datetime=parseInt(datetime)*1000;
+                } else if(datetime.length==13) {
+                    datetime=parseInt(datetime);
+                }
+            }
+            datetime=new Date(datetime);
+            var o = {
+                "M+" : datetime.getMonth()+1,                 //月份
+                "d+" : datetime.getDate(),                    //日
+                "h+" : datetime.getHours(),                   //小时
+                "m+" : datetime.getMinutes(),                 //分
+                "s+" : datetime.getSeconds(),                 //秒
+                "q+" : Math.floor((datetime.getMonth()+3)/3), //季度
+                "S"  : datetime.getMilliseconds()             //毫秒
+            };
+            if(/(y+)/.test(fmt))
+                fmt=fmt.replace(RegExp.$1, (datetime.getFullYear()+"").substr(4 - RegExp.$1.length));
+            for(var k in o)
+                if(new RegExp("("+ k +")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            return fmt;
+        }
     </script>
 </body>
 </html>

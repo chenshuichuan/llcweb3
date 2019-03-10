@@ -70,6 +70,9 @@ public class Activity extends BaseEntity {
     @Column(name = "is_publish" )
     private Integer isPublish;
 
+    public Activity() {
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

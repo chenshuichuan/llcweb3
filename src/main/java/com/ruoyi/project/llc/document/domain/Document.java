@@ -62,6 +62,10 @@ public class Document extends BaseEntity {
     @Column(name = "update_time" )
     private Date updateTime;
 
+    public Document() {
+        this.updateTime = new Date();
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

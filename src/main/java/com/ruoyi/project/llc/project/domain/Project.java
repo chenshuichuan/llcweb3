@@ -121,6 +121,23 @@ public class Project extends BaseEntity {
      */
     @Column(name = "update_time" )
     private Date updateTime;
+    /**
+     * 所属类别：用于门户分类
+     */
+    @Column(name = "team" )
+    private String team;
+
+    public Project() {
+        this.updateTime = new Date();
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -273,11 +290,11 @@ public class Project extends BaseEntity {
     public Integer getIsPublish() {
         return isPublish;
     }
-
+    @Override
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
+    @Override
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -305,6 +322,7 @@ public class Project extends BaseEntity {
                 .append("undertakeUnit" , getUndertakeUnit())
                 .append("isPublish" , getIsPublish())
                 .append("updateTime" , getUpdateTime())
+                .append("team",getTeam())
                 .toString();
     }
 }

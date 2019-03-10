@@ -13,27 +13,22 @@
 							<li>
 								姓名：<input type="text" name="name"/>
 							</li>
-
 							<li>
 								留言内容：<input type="text" name="content"/>
 							</li>
-
-							<li>
-								联系方式：<input type="text" name="contact"/>
+							<li class="select-time">
+								<label>留言时间：</label>
+								<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="createTime"/>
+								<!--<span>-</span>-->
+								<!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="createTime"/>-->
 							</li>
-
 							<li>
-								留言时间：<input type="text" name="createTime"/>
+								是否已查看：
+								<select id="isView" name="isView"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								管理员是否已经查看过：<input type="text" name="isView"/>
-							</li>
-
-							<li>
-								ip地址：<input type="text" name="ipAddress"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -44,9 +39,7 @@
 			</div>
 			
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="llc:comments:add">
-					<i class="fa fa-plus"></i> 添加
-				</a>
+
 				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="llc:comments:edit">
 					<i class="fa fa-edit"></i> 修改
 				</a>
@@ -66,6 +59,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:comments:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:comments:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/comments";
 
@@ -95,7 +89,9 @@
 				{
 					field : 'content', 
 					title : '留言内容',
-					sortable: true
+//                    formatter: function(value, row, index) {
+//                        return $.table.tooltip(value);
+//                    }
 				},
 				{
 					field : 'contact', 
@@ -109,12 +105,15 @@
 				},
 				{
 					field : 'isView', 
-					title : '管理员是否已经查看过',
-					sortable: true
+					title : '是否已查看',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'ipAddress', 
-					title : 'ip地址',
+					title : 'IP地址',
 					sortable: true
 				},
 		        {

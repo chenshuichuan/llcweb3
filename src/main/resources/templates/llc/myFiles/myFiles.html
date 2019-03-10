@@ -64,16 +64,16 @@
 			</div>
 			
 	        <div class="btn-group-sm hidden-xs" id="toolbar" role="group">
-				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="llc:files:add">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="llc:myFiles:add">
 					<i class="fa fa-plus"></i> 添加
 				</a>
-				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="llc:files:edit">
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="llc:myFiles:edit">
 					<i class="fa fa-edit"></i> 修改
 				</a>
-				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="llc:files:remove">
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="llc:myFiles:remove">
 					<i class="fa fa-remove"></i> 删除
 				</a>
-				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="llc:files:export">
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="llc:myFiles:export">
 						<i class="fa fa-download"></i> 导出
 				 </a>
 			</div>
@@ -84,10 +84,10 @@
 	</div>
     <div th:include="include :: footer"></div>
     <script th:inline="javascript">
-        var editFlag = [[${@permission.hasPermi('llc:files:edit')}]];
-        var removeFlag = [[${@permission.hasPermi('llc:files:remove')}]];
+        var editFlag = [[${@permission.hasPermi('llc:myFiles:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('llc:myFiles:remove')}]];
         ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/files";
+        var prefix = ctx + "llc/myFiles";
 
         $(function() {
             var options = {

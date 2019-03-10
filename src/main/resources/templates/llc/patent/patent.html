@@ -13,71 +13,37 @@
 							<li>
 								专利标题：<input type="text" name="title"/>
 							</li>
-
 							<li>
-								申请日：<input type="text" name="appliDate"/>
+								作者：<input type="text" name="authorList"/>
 							</li>
 
 							<li>
-								专利介绍：<input type="text" name="introduction"/>
+								申请号：<input type="text" name="appliNum"/>
 							</li>
-
 							<li>
-								作者姓名列表：<input type="text" name="authorList"/>
+								公开号：<input type="text" name="publicNum"/>
 							</li>
-
-							<li>
-								原文链接：<input type="text" name="originalLink"/>
-							</li>
-
-							<li>
-								关联的文件id：<input type="text" name="sourceFile"/>
-							</li>
-
-							<li>
-								专利申请号：<input type="text" name="appliNum"/>
-							</li>
-
-							<li>
-								申请人（一般为广东工业大学）：<input type="text" name="appliPeople"/>
-							</li>
-
-							<li>
-								申请日期：<input type="text" name="applicationDate"/>
-							</li>
-
-							<li>
-								专利公开号：<input type="text" name="publicNum"/>
-							</li>
-
-							<li>
-								公开日：<input type="text" name="publicDate"/>
-							</li>
-
-							<li>
-								授权日期：<input type="text" name="authorizationDate"/>
-							</li>
-
 							<li>
 								代理机构：<input type="text" name="agency"/>
 							</li>
-
 							<li>
 								专利状态：<input type="text" name="state"/>
 							</li>
-
 							<li>
-								组别：<input type="text" name="model"/>
+								组别：
+								<select id="model" name="model"  th:with="type=${@dict.getType('user_models')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
 
 							<li>
-								是否发布：<input type="text" name="isPublish"/>
+								是否发布：
+								<select id="isPublish" name="isPublish"  th:with="type=${@dict.getType('user_yes_no')}">
+									<option value="">所有</option>
+									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+								</select>
 							</li>
-
-							<li>
-								更新时间：<input type="text" name="updateTime"/>
-							</li>
-
 							<li>
 								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
 								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -110,6 +76,7 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:patent:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:patent:remove')}]];
+        var datas = [[${@dict.getType('user_yes_no')}]];
         ctx = ctx + webPrefix+"/";
         var prefix = ctx + "llc/patent";
 
@@ -128,12 +95,12 @@
 		        },
 				{
 					field : 'id', 
-					title : '',
+					title : 'id',
 					visible: false
 				},
 				{
 					field : 'title', 
-					title : '专利标题',
+					title : '题目',
 					sortable: true
 				},
 				{
@@ -143,33 +110,33 @@
 				},
 				{
 					field : 'introduction', 
-					title : '专利介绍',
-					sortable: true
+					title : '简介',
+                    visible: false
 				},
 				{
 					field : 'authorList', 
-					title : '作者姓名列表',
+					title : '作者列表',
 					sortable: true
 				},
 				{
 					field : 'originalLink', 
 					title : '原文链接',
-					sortable: true
+                    visible: false
 				},
 				{
 					field : 'sourceFile', 
-					title : '关联的文件id',
+					title : '关联文件',
 					sortable: true
 				},
 				{
 					field : 'appliNum', 
-					title : '专利申请号',
+					title : '申请号',
 					sortable: true
 				},
 				{
 					field : 'appliPeople', 
-					title : '申请人（一般为广东工业大学）',
-					sortable: true
+					title : '申请人',
+                    visible: false
 				},
 				{
 					field : 'applicationDate', 
@@ -178,12 +145,12 @@
 				},
 				{
 					field : 'publicNum', 
-					title : '专利公开号',
+					title : '公开号',
 					sortable: true
 				},
 				{
 					field : 'publicDate', 
-					title : '公开日',
+					title : '公开日期',
 					sortable: true
 				},
 				{
@@ -194,11 +161,12 @@
 				{
 					field : 'agency', 
 					title : '代理机构',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'state', 
-					title : '专利状态',
+					title : '状态',
 					sortable: true
 				},
 				{
@@ -209,12 +177,15 @@
 				{
 					field : 'isPublish', 
 					title : '是否发布',
-					sortable: true
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
 				},
 				{
 					field : 'updateTime', 
 					title : '更新时间',
-					sortable: true
+                    visible: false
 				},
 		        {
 		            title: '操作',
