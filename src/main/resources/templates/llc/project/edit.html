@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-project-edit" th:object="${project}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目名称：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目编号：</label>
+				<div class="col-sm-8">
+					<input id="requireNum" name="requireNum" th:field="*{requireNum}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目介绍：</label>
+				<div class="col-sm-8">
+					<input id="introduction" name="introduction" th:field="*{introduction}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">介绍文件：</label>
+				<div class="col-sm-8">
+					<input id="introductionFile" name="introductionFile" th:field="*{introductionFile}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目状态：</label>
+				<div class="col-sm-8">
+					<input id="status" name="status" th:field="*{status}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">研究领域：</label>
+				<div class="col-sm-8">
+					<input id="researchField" name="researchField" th:field="*{researchField}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目经费：</label>
+				<div class="col-sm-8">
+					<input id="money" name="money" th:field="*{money}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">开始时间：</label>
+				<div class="col-sm-8">
+					<input id="startDate" name="startDate" th:field="*{startDate}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">结束时间：</label>
+				<div class="col-sm-8">
+					<input id="endDate" name="endDate" th:field="*{endDate}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目负责人：</label>
+				<div class="col-sm-8">
+					<input id="responsiblePerson" name="responsiblePerson" th:field="*{responsiblePerson}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目类型：</label>
+				<div class="col-sm-8">
+					<input id="projectType" name="projectType" th:field="*{projectType}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目人员：</label>
+				<div class="col-sm-8">
+					<input id="members" name="members" th:field="*{members}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目描述：</label>
+				<div class="col-sm-8">
+					<input id="projectDes" name="projectDes" th:field="*{projectDes}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">项目目标：</label>
+				<div class="col-sm-8">
+					<input id="projectAim" name="projectAim" th:field="*{projectAim}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">主办单位：</label>
+				<div class="col-sm-8">
+					<input id="hostUnit" name="hostUnit" th:field="*{hostUnit}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">协办单位：</label>
+				<div class="col-sm-8">
+					<input id="coUnit" name="coUnit" th:field="*{coUnit}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">承办单位：</label>
+				<div class="col-sm-8">
+					<input id="undertakeUnit" name="undertakeUnit" th:field="*{undertakeUnit}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否发布：</label>
+				<div class="col-sm-8">
+					<input id="isPublish" name="isPublish" th:field="*{isPublish}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新时间：</label>
+				<div class="col-sm-8">
+					<input id="updateTime" name="updateTime" th:field="*{updateTime}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        ctx = ctx + webPrefix+"/";
+		var prefix = ctx + "llc/project"
+		$("#form-project-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-project-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

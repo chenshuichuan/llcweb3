@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-comments-edit" th:object="${comments}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">姓名：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">留言内容：</label>
+				<div class="col-sm-8">
+					<input id="content" name="content" th:field="*{content}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">联系方式：</label>
+				<div class="col-sm-8">
+					<input id="contact" name="contact" th:field="*{contact}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">留言时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" th:field="*{createTime}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">管理员是否已经查看过：</label>
+				<div class="col-sm-8">
+					<input id="isView" name="isView" th:field="*{isView}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">ip地址：</label>
+				<div class="col-sm-8">
+					<input id="ipAddress" name="ipAddress" th:field="*{ipAddress}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        ctx = ctx + webPrefix+"/";
+		var prefix = ctx + "llc/comments"
+		$("#form-comments-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-comments-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

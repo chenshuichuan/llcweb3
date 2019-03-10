@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.people.mapper.PeopleMapper">
+    
+    <resultMap type="People" id="PeopleResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="portrait"    column="portrait"    />
+        <result property="position"    column="position"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="grade"    column="grade"    />
+        <result property="researchField"    column="research_field"    />
+        <result property="academicTitle"    column="academic_title"    />
+        <result property="adminPosition"    column="admin_position"    />
+        <result property="highestDegree"    column="highest_degree"    />
+        <result property="sex"    column="sex"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectPeopleVo">
+        select id, name, phone, email, portrait, position, introduction, grade, research_field, academic_title, admin_position, highest_degree, sex, update_time from llc_people
+    </sql>
+	
+    <select id="selectPeopleList" parameterType="People" resultMap="PeopleResult">
+        <include refid="selectPeopleVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="email != null  and email != '' "> and email = #{email}</if>
+             <if test="portrait != null "> and portrait = #{portrait}</if>
+             <if test="position != null  and position != '' "> and position = #{position}</if>
+             <if test="introduction != null "> and introduction = #{introduction}</if>
+             <if test="grade != null "> and grade = #{grade}</if>
+             <if test="researchField != null  and researchField != '' "> and research_field = #{researchField}</if>
+             <if test="academicTitle != null  and academicTitle != '' "> and academic_title = #{academicTitle}</if>
+             <if test="adminPosition != null  and adminPosition != '' "> and admin_position = #{adminPosition}</if>
+             <if test="highestDegree != null  and highestDegree != '' "> and highest_degree = #{highestDegree}</if>
+             <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectPeopleById" parameterType="Integer" resultMap="PeopleResult">
+        <include refid="selectPeopleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPeople" parameterType="People">
+        insert into llc_people
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="email != null  and email != ''  ">email,</if>
+			<if test="portrait != null  ">portrait,</if>
+			<if test="position != null  and position != ''  ">position,</if>
+			<if test="introduction != null  ">introduction,</if>
+			<if test="grade != null  ">grade,</if>
+			<if test="researchField != null  and researchField != ''  ">research_field,</if>
+			<if test="academicTitle != null  and academicTitle != ''  ">academic_title,</if>
+			<if test="adminPosition != null  and adminPosition != ''  ">admin_position,</if>
+			<if test="highestDegree != null  and highestDegree != ''  ">highest_degree,</if>
+			<if test="sex != null  and sex != ''  ">sex,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="email != null  and email != ''  ">#{email},</if>
+			<if test="portrait != null  ">#{portrait},</if>
+			<if test="position != null  and position != ''  ">#{position},</if>
+			<if test="introduction != null  ">#{introduction},</if>
+			<if test="grade != null  ">#{grade},</if>
+			<if test="researchField != null  and researchField != ''  ">#{researchField},</if>
+			<if test="academicTitle != null  and academicTitle != ''  ">#{academicTitle},</if>
+			<if test="adminPosition != null  and adminPosition != ''  ">#{adminPosition},</if>
+			<if test="highestDegree != null  and highestDegree != ''  ">#{highestDegree},</if>
+			<if test="sex != null  and sex != ''  ">#{sex},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePeople" parameterType="People">
+        update llc_people
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="email != null  and email != ''  ">email = #{email},</if>
+            <if test="portrait != null  ">portrait = #{portrait},</if>
+            <if test="position != null  and position != ''  ">position = #{position},</if>
+            <if test="introduction != null  ">introduction = #{introduction},</if>
+            <if test="grade != null  ">grade = #{grade},</if>
+            <if test="researchField != null  and researchField != ''  ">research_field = #{researchField},</if>
+            <if test="academicTitle != null  and academicTitle != ''  ">academic_title = #{academicTitle},</if>
+            <if test="adminPosition != null  and adminPosition != ''  ">admin_position = #{adminPosition},</if>
+            <if test="highestDegree != null  and highestDegree != ''  ">highest_degree = #{highestDegree},</if>
+            <if test="sex != null  and sex != ''  ">sex = #{sex},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deletePeopleById" parameterType="Integer">
+        delete from llc_people where id = #{id}
+    </delete>
+	
+    <delete id="deletePeopleByIds" parameterType="String">
+        delete from llc_people where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-activity-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">活动名称：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">活动发布者：</label>
+				<div class="col-sm-8">
+					<input id="author" name="author" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">活动参与者：</label>
+				<div class="col-sm-8">
+					<input id="peopleList" name="peopleList" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">开始时间：</label>
+				<div class="col-sm-8">
+					<input id="startDate" name="startDate" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">结束时间：</label>
+				<div class="col-sm-8">
+					<input id="endDate" name="endDate" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">活动简介：</label>
+				<div class="col-sm-8">
+					<input id="introduction" name="introduction" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">组别：</label>
+				<div class="col-sm-8">
+					<input id="model" name="model" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">活动类型,通知、会议、招聘、活动等：</label>
+				<div class="col-sm-8">
+					<input id="activityType" name="activityType" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否发布出去：</label>
+				<div class="col-sm-8">
+					<input id="isPublish" name="isPublish" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        ctx = ctx + webPrefix+"/";
+		var prefix = ctx + "llc/activity"
+		$("#form-activity-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-activity-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

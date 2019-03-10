@@ -26,7 +26,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * @date ${datetime}
  */
 @Controller
-@RequestMapping("/${moduleName}/${classname}")
+@RequestMapping("/admin/${moduleName}/${classname}")
 public class ${className}Controller extends BaseController
 {
     private String prefix = "${moduleName}/${classname}";

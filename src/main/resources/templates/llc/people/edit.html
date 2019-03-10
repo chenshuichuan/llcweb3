@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-people-edit" th:object="${people}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">姓名：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">手机号：</label>
+				<div class="col-sm-8">
+					<input id="phone" name="phone" th:field="*{phone}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">y邮箱：</label>
+				<div class="col-sm-8">
+					<input id="email" name="email" th:field="*{email}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">人物头像图片路径，关联image表：</label>
+				<div class="col-sm-8">
+					<input id="portrait" name="portrait" th:field="*{portrait}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">职位，教授、副教授、讲师、博士后、博士、硕士，本科生：</label>
+				<div class="col-sm-8">
+					<input id="position" name="position" th:field="*{position}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">关联document表：</label>
+				<div class="col-sm-8">
+					<input id="introduction" name="introduction" th:field="*{introduction}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">本科生、硕士生、博士生是届数；讲师，教授，等是加入年份：</label>
+				<div class="col-sm-8">
+					<input id="grade" name="grade" th:field="*{grade}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">研究方向：</label>
+				<div class="col-sm-8">
+					<input id="researchField" name="researchField" th:field="*{researchField}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学术头衔：</label>
+				<div class="col-sm-8">
+					<input id="academicTitle" name="academicTitle" th:field="*{academicTitle}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">行政职务：</label>
+				<div class="col-sm-8">
+					<input id="adminPosition" name="adminPosition" th:field="*{adminPosition}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">最高学历：</label>
+				<div class="col-sm-8">
+					<input id="highestDegree" name="highestDegree" th:field="*{highestDegree}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">性别：</label>
+				<div class="col-sm-8">
+					<input id="sex" name="sex" th:field="*{sex}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新时间：</label>
+				<div class="col-sm-8">
+					<input id="updateTime" name="updateTime" th:field="*{updateTime}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        ctx = ctx + webPrefix+"/";
+		var prefix = ctx + "llc/people"
+		$("#form-people-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-people-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.activity.mapper.ActivityMapper">
+    
+    <resultMap type="Activity" id="ActivityResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="author"    column="author"    />
+        <result property="peopleList"    column="people_list"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="model"    column="model"    />
+        <result property="activityType"    column="activity_type"    />
+        <result property="isPublish"    column="is_publish"    />
+    </resultMap>
+	
+	<sql id="selectActivityVo">
+        select id, name, author, people_list, start_date, end_date, introduction, model, activity_type, is_publish from llc_activity
+    </sql>
+	
+    <select id="selectActivityList" parameterType="Activity" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="author != null  and author != '' "> and author = #{author}</if>
+             <if test="peopleList != null  and peopleList != '' "> and people_list = #{peopleList}</if>
+             <if test="startDate != null "> and start_date = #{startDate}</if>
+             <if test="endDate != null "> and end_date = #{endDate}</if>
+             <if test="introduction != null "> and introduction = #{introduction}</if>
+             <if test="model != null  and model != '' "> and model = #{model}</if>
+             <if test="activityType != null  and activityType != '' "> and activity_type = #{activityType}</if>
+             <if test="isPublish != null "> and is_publish = #{isPublish}</if>
+         </where>
+    </select>
+    
+    <select id="selectActivityById" parameterType="Integer" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertActivity" parameterType="Activity">
+        insert into llc_activity
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="author != null  and author != ''  ">author,</if>
+			<if test="peopleList != null  and peopleList != ''  ">people_list,</if>
+			<if test="startDate != null  ">start_date,</if>
+			<if test="endDate != null  ">end_date,</if>
+			<if test="introduction != null  ">introduction,</if>
+			<if test="model != null  and model != ''  ">model,</if>
+			<if test="activityType != null  and activityType != ''  ">activity_type,</if>
+			<if test="isPublish != null  ">is_publish,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="author != null  and author != ''  ">#{author},</if>
+			<if test="peopleList != null  and peopleList != ''  ">#{peopleList},</if>
+			<if test="startDate != null  ">#{startDate},</if>
+			<if test="endDate != null  ">#{endDate},</if>
+			<if test="introduction != null  ">#{introduction},</if>
+			<if test="model != null  and model != ''  ">#{model},</if>
+			<if test="activityType != null  and activityType != ''  ">#{activityType},</if>
+			<if test="isPublish != null  ">#{isPublish},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateActivity" parameterType="Activity">
+        update llc_activity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="author != null  and author != ''  ">author = #{author},</if>
+            <if test="peopleList != null  and peopleList != ''  ">people_list = #{peopleList},</if>
+            <if test="startDate != null  ">start_date = #{startDate},</if>
+            <if test="endDate != null  ">end_date = #{endDate},</if>
+            <if test="introduction != null  ">introduction = #{introduction},</if>
+            <if test="model != null  and model != ''  ">model = #{model},</if>
+            <if test="activityType != null  and activityType != ''  ">activity_type = #{activityType},</if>
+            <if test="isPublish != null  ">is_publish = #{isPublish},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteActivityById" parameterType="Integer">
+        delete from llc_activity where id = #{id}
+    </delete>
+	
+    <delete id="deleteActivityByIds" parameterType="String">
+        delete from llc_activity where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

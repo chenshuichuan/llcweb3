@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.platform.mapper.PlatformMapper">
+    
+    <resultMap type="Platform" id="PlatformResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="address"    column="address"    />
+        <result property="videoAddress"    column="video_address"    />
+        <result property="coverImage"    column="cover_image"    />
+        <result property="date"    column="date"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="pdfFile"    column="pdf_file"    />
+        <result property="isPublish"    column="is_publish"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectPlatformVo">
+        select id, name, address, video_address, cover_image, date, introduction, pdf_file, is_publish, update_time from llc_platform
+    </sql>
+	
+    <select id="selectPlatformList" parameterType="Platform" resultMap="PlatformResult">
+        <include refid="selectPlatformVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="videoAddress != null  and videoAddress != '' "> and video_address = #{videoAddress}</if>
+             <if test="coverImage != null  and coverImage != '' "> and cover_image = #{coverImage}</if>
+             <if test="date != null "> and date = #{date}</if>
+             <if test="introduction != null "> and introduction = #{introduction}</if>
+             <if test="pdfFile != null "> and pdf_file = #{pdfFile}</if>
+             <if test="isPublish != null "> and is_publish = #{isPublish}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectPlatformById" parameterType="Integer" resultMap="PlatformResult">
+        <include refid="selectPlatformVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPlatform" parameterType="Platform">
+        insert into llc_platform
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="videoAddress != null  and videoAddress != ''  ">video_address,</if>
+			<if test="coverImage != null  and coverImage != ''  ">cover_image,</if>
+			<if test="date != null  ">date,</if>
+			<if test="introduction != null  ">introduction,</if>
+			<if test="pdfFile != null  ">pdf_file,</if>
+			<if test="isPublish != null  ">is_publish,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="videoAddress != null  and videoAddress != ''  ">#{videoAddress},</if>
+			<if test="coverImage != null  and coverImage != ''  ">#{coverImage},</if>
+			<if test="date != null  ">#{date},</if>
+			<if test="introduction != null  ">#{introduction},</if>
+			<if test="pdfFile != null  ">#{pdfFile},</if>
+			<if test="isPublish != null  ">#{isPublish},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePlatform" parameterType="Platform">
+        update llc_platform
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="videoAddress != null  and videoAddress != ''  ">video_address = #{videoAddress},</if>
+            <if test="coverImage != null  and coverImage != ''  ">cover_image = #{coverImage},</if>
+            <if test="date != null  ">date = #{date},</if>
+            <if test="introduction != null  ">introduction = #{introduction},</if>
+            <if test="pdfFile != null  ">pdf_file = #{pdfFile},</if>
+            <if test="isPublish != null  ">is_publish = #{isPublish},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deletePlatformById" parameterType="Integer">
+        delete from llc_platform where id = #{id}
+    </delete>
+	
+    <delete id="deletePlatformByIds" parameterType="String">
+        delete from llc_platform where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

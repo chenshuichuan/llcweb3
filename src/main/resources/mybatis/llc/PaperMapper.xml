@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.paper.mapper.PaperMapper">
+    
+    <resultMap type="Paper" id="PaperResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="publicDate"    column="public_date"    />
+        <result property="introduction"    column="introduction"    />
+        <result property="authorList"    column="author_list"    />
+        <result property="originalLink"    column="original_link"    />
+        <result property="sourceFile"    column="source_file"    />
+        <result property="belongProject"    column="belong_project"    />
+        <result property="periodical"    column="periodical"    />
+        <result property="periodicalType"    column="periodical_type"    />
+        <result property="state"    column="state"    />
+        <result property="model"    column="model"    />
+        <result property="isPublish"    column="is_publish"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectPaperVo">
+        select id, title, public_date, introduction, author_list, original_link, source_file, belong_project, periodical, periodical_type, state, model, is_publish, update_time from llc_paper
+    </sql>
+	
+    <select id="selectPaperList" parameterType="Paper" resultMap="PaperResult">
+        <include refid="selectPaperVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="publicDate != null "> and public_date = #{publicDate}</if>
+             <if test="introduction != null "> and introduction = #{introduction}</if>
+             <if test="authorList != null  and authorList != '' "> and author_list = #{authorList}</if>
+             <if test="originalLink != null  and originalLink != '' "> and original_link = #{originalLink}</if>
+             <if test="sourceFile != null "> and source_file = #{sourceFile}</if>
+             <if test="belongProject != null  and belongProject != '' "> and belong_project = #{belongProject}</if>
+             <if test="periodical != null  and periodical != '' "> and periodical = #{periodical}</if>
+             <if test="periodicalType != null  and periodicalType != '' "> and periodical_type = #{periodicalType}</if>
+             <if test="state != null  and state != '' "> and state = #{state}</if>
+             <if test="model != null  and model != '' "> and model = #{model}</if>
+             <if test="isPublish != null "> and is_publish = #{isPublish}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectPaperById" parameterType="Integer" resultMap="PaperResult">
+        <include refid="selectPaperVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPaper" parameterType="Paper">
+        insert into llc_paper
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="title != null  and title != ''  ">title,</if>
+			<if test="publicDate != null  ">public_date,</if>
+			<if test="introduction != null  ">introduction,</if>
+			<if test="authorList != null  and authorList != ''  ">author_list,</if>
+			<if test="originalLink != null  and originalLink != ''  ">original_link,</if>
+			<if test="sourceFile != null  ">source_file,</if>
+			<if test="belongProject != null  and belongProject != ''  ">belong_project,</if>
+			<if test="periodical != null  and periodical != ''  ">periodical,</if>
+			<if test="periodicalType != null  and periodicalType != ''  ">periodical_type,</if>
+			<if test="state != null  and state != ''  ">state,</if>
+			<if test="model != null  and model != ''  ">model,</if>
+			<if test="isPublish != null  ">is_publish,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="title != null  and title != ''  ">#{title},</if>
+			<if test="publicDate != null  ">#{publicDate},</if>
+			<if test="introduction != null  ">#{introduction},</if>
+			<if test="authorList != null  and authorList != ''  ">#{authorList},</if>
+			<if test="originalLink != null  and originalLink != ''  ">#{originalLink},</if>
+			<if test="sourceFile != null  ">#{sourceFile},</if>
+			<if test="belongProject != null  and belongProject != ''  ">#{belongProject},</if>
+			<if test="periodical != null  and periodical != ''  ">#{periodical},</if>
+			<if test="periodicalType != null  and periodicalType != ''  ">#{periodicalType},</if>
+			<if test="state != null  and state != ''  ">#{state},</if>
+			<if test="model != null  and model != ''  ">#{model},</if>
+			<if test="isPublish != null  ">#{isPublish},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePaper" parameterType="Paper">
+        update llc_paper
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="publicDate != null  ">public_date = #{publicDate},</if>
+            <if test="introduction != null  ">introduction = #{introduction},</if>
+            <if test="authorList != null  and authorList != ''  ">author_list = #{authorList},</if>
+            <if test="originalLink != null  and originalLink != ''  ">original_link = #{originalLink},</if>
+            <if test="sourceFile != null  ">source_file = #{sourceFile},</if>
+            <if test="belongProject != null  and belongProject != ''  ">belong_project = #{belongProject},</if>
+            <if test="periodical != null  and periodical != ''  ">periodical = #{periodical},</if>
+            <if test="periodicalType != null  and periodicalType != ''  ">periodical_type = #{periodicalType},</if>
+            <if test="state != null  and state != ''  ">state = #{state},</if>
+            <if test="model != null  and model != ''  ">model = #{model},</if>
+            <if test="isPublish != null  ">is_publish = #{isPublish},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deletePaperById" parameterType="Integer">
+        delete from llc_paper where id = #{id}
+    </delete>
+	
+    <delete id="deletePaperByIds" parameterType="String">
+        delete from llc_paper where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

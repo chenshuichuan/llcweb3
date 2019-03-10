@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.comments.mapper.CommentsMapper">
+    
+    <resultMap type="Comments" id="CommentsResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="content"    column="content"    />
+        <result property="contact"    column="contact"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="isView"    column="is_view"    />
+        <result property="ipAddress"    column="ip_address"    />
+    </resultMap>
+	
+	<sql id="selectCommentsVo">
+        select id, name, content, contact, create_time, is_view, ip_address from llc_comments
+    </sql>
+	
+    <select id="selectCommentsList" parameterType="Comments" resultMap="CommentsResult">
+        <include refid="selectCommentsVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="content != null  and content != '' "> and content = #{content}</if>
+             <if test="contact != null  and contact != '' "> and contact = #{contact}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="isView != null "> and is_view = #{isView}</if>
+             <if test="ipAddress != null  and ipAddress != '' "> and ip_address = #{ipAddress}</if>
+         </where>
+    </select>
+    
+    <select id="selectCommentsById" parameterType="Integer" resultMap="CommentsResult">
+        <include refid="selectCommentsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertComments" parameterType="Comments">
+        insert into llc_comments
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="content != null  and content != ''  ">content,</if>
+			<if test="contact != null  and contact != ''  ">contact,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="isView != null  ">is_view,</if>
+			<if test="ipAddress != null  and ipAddress != ''  ">ip_address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="content != null  and content != ''  ">#{content},</if>
+			<if test="contact != null  and contact != ''  ">#{contact},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="isView != null  ">#{isView},</if>
+			<if test="ipAddress != null  and ipAddress != ''  ">#{ipAddress},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateComments" parameterType="Comments">
+        update llc_comments
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="content != null  and content != ''  ">content = #{content},</if>
+            <if test="contact != null  and contact != ''  ">contact = #{contact},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="isView != null  ">is_view = #{isView},</if>
+            <if test="ipAddress != null  and ipAddress != ''  ">ip_address = #{ipAddress},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteCommentsById" parameterType="Integer">
+        delete from llc_comments where id = #{id}
+    </delete>
+	
+    <delete id="deleteCommentsByIds" parameterType="String">
+        delete from llc_comments where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

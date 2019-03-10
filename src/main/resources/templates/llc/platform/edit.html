@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-platform-edit" th:object="${platform}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">平台名称：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">平台转跳地址：</label>
+				<div class="col-sm-8">
+					<input id="address" name="address" th:field="*{address}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">平台介绍视频：</label>
+				<div class="col-sm-8">
+					<input id="videoAddress" name="videoAddress" th:field="*{videoAddress}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">j介绍封面图片：</label>
+				<div class="col-sm-8">
+					<input id="coverImage" name="coverImage" th:field="*{coverImage}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">：</label>
+				<div class="col-sm-8">
+					<input id="date" name="date" th:field="*{date}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">平台介绍文档：</label>
+				<div class="col-sm-8">
+					<input id="introduction" name="introduction" th:field="*{introduction}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">p平台介绍PDF文件：</label>
+				<div class="col-sm-8">
+					<input id="pdfFile" name="pdfFile" th:field="*{pdfFile}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">是否发布：</label>
+				<div class="col-sm-8">
+					<input id="isPublish" name="isPublish" th:field="*{isPublish}" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">更新时间：</label>
+				<div class="col-sm-8">
+					<input id="updateTime" name="updateTime" th:field="*{updateTime}" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        ctx = ctx + webPrefix+"/";
+		var prefix = ctx + "llc/platform"
+		$("#form-platform-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-platform-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

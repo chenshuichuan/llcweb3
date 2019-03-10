@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.llc.document.mapper.DocumentMapper">
+    
+    <resultMap type="Document" id="DocumentResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="author"    column="author"    />
+        <result property="content"    column="content"    />
+        <result property="infor"    column="infor"    />
+        <result property="model"    column="model"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+	
+	<sql id="selectDocumentVo">
+        select id, title, author, content, infor, model, create_time, update_time from llc_document
+    </sql>
+	
+    <select id="selectDocumentList" parameterType="Document" resultMap="DocumentResult">
+        <include refid="selectDocumentVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="author != null  and author != '' "> and author = #{author}</if>
+             <if test="content != null  and content != '' "> and content = #{content}</if>
+             <if test="infor != null  and infor != '' "> and infor = #{infor}</if>
+             <if test="model != null  and model != '' "> and model = #{model}</if>
+             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectDocumentById" parameterType="Long" resultMap="DocumentResult">
+        <include refid="selectDocumentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDocument" parameterType="Document">
+        insert into llc_document
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="title != null  and title != ''  ">title,</if>
+			<if test="author != null  and author != ''  ">author,</if>
+			<if test="content != null  and content != ''  ">content,</if>
+			<if test="infor != null  and infor != ''  ">infor,</if>
+			<if test="model != null  and model != ''  ">model,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="title != null  and title != ''  ">#{title},</if>
+			<if test="author != null  and author != ''  ">#{author},</if>
+			<if test="content != null  and content != ''  ">#{content},</if>
+			<if test="infor != null  and infor != ''  ">#{infor},</if>
+			<if test="model != null  and model != ''  ">#{model},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateDocument" parameterType="Document">
+        update llc_document
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="author != null  and author != ''  ">author = #{author},</if>
+            <if test="content != null  and content != ''  ">content = #{content},</if>
+            <if test="infor != null  and infor != ''  ">infor = #{infor},</if>
+            <if test="model != null  and model != ''  ">model = #{model},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteDocumentById" parameterType="Long">
+        delete from llc_document where id = #{id}
+    </delete>
+	
+    <delete id="deleteDocumentByIds" parameterType="String">
+        delete from llc_document where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
