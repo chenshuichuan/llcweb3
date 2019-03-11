@@ -11,6 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 2019/3/10
  */
 public interface SoftwareRepository extends JpaRepository<Software,Integer> {
-
-
+    Software findBySourceFile(Integer sourceFile);
 }

@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.platform.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,8 @@ public class PlatformServiceImpl implements IPlatformService
 	@Override
 	public int insertPlatform(Platform platform)
 	{
-	    return platformMapper.insertPlatform(platform);
+		platform.setUpdateTime(new Date());
+		return platformMapper.insertPlatform(platform);
 	}
 	
 	/**
@@ -65,7 +67,8 @@ public class PlatformServiceImpl implements IPlatformService
 	@Override
 	public int updatePlatform(Platform platform)
 	{
-	    return platformMapper.updatePlatform(platform);
+		platform.setUpdateTime(new Date());
+		return platformMapper.updatePlatform(platform);
 	}
 
 	/**

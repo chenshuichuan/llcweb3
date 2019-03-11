@@ -43,8 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="status != null  and status != '' "> and status = #{status}</if>
              <if test="researchField != null  and researchField != '' "> and research_field = #{researchField}</if>
              <if test="money != null  and money != '' "> and money = #{money}</if>
-             <if test="startDate != null "> and start_date = #{startDate}</if>
-             <if test="endDate != null "> and end_date = #{endDate}</if>
+             <!-- <if test="startDate != null "> and start_date = #{startDate}</if>-->
+             <!-- <if test="endDate != null "> and end_date = #{endDate}</if>-->
              <if test="responsiblePerson != null  and responsiblePerson != '' "> and responsible_person = #{responsiblePerson}</if>
              <if test="projectType != null  and projectType != '' "> and project_type = #{projectType}</if>
              <if test="members != null  and members != '' "> and members = #{members}</if>
@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="coUnit != null  and coUnit != '' "> and co_unit = #{coUnit}</if>
              <if test="undertakeUnit != null  and undertakeUnit != '' "> and undertake_unit = #{undertakeUnit}</if>
              <if test="isPublish != null "> and is_publish = #{isPublish}</if>
-             <if test="updateTime != null "> and update_time = #{updateTime}</if>
+             <!-- <if test="updateTime != null "> and update_time = #{updateTime}</if>-->
          </where>
     </select>
     

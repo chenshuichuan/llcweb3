@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.patent.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,8 @@ public class PatentServiceImpl implements IPatentService
 	@Override
 	public int insertPatent(Patent patent)
 	{
-	    return patentMapper.insertPatent(patent);
+		patent.setUpdateTime(new Date());
+		return patentMapper.insertPatent(patent);
 	}
 	
 	/**
@@ -65,7 +67,8 @@ public class PatentServiceImpl implements IPatentService
 	@Override
 	public int updatePatent(Patent patent)
 	{
-	    return patentMapper.updatePatent(patent);
+		patent.setUpdateTime(new Date());
+		return patentMapper.updatePatent(patent);
 	}
 
 	/**

@@ -1,6 +1,9 @@
 package com.ruoyi.project.llc.paper.service;
 
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.llc.paper.mapper.PaperMapper;
@@ -53,7 +56,9 @@ public class PaperServiceImpl implements IPaperService
 	@Override
 	public int insertPaper(Paper paper)
 	{
-	    return paperMapper.insertPaper(paper);
+		paper.setCreateTime(new Date());
+		paper.setUpdateTime(new Date());
+		return paperMapper.insertPaper(paper);
 	}
 	
 	/**
@@ -65,7 +70,9 @@ public class PaperServiceImpl implements IPaperService
 	@Override
 	public int updatePaper(Paper paper)
 	{
-	    return paperMapper.updatePaper(paper);
+
+		paper.setUpdateTime(new Date());
+		return paperMapper.updatePaper(paper);
 	}
 
 	/**

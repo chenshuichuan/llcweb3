@@ -15,7 +15,7 @@ import com.ruoyi.common.support.Convert;
  * @date 2019-03-10
  */
 @Service
-public class MyFilesServiceImpl implements IMyFilesService 
+public class MyFilesServiceImpl implements IMyFilesService
 {
 	@Autowired
 	private MyFilesMapper myFilesMapper;

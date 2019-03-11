@@ -1,11 +1,10 @@
 package com.ruoyi.project.llc.document.domain;
 
+import com.ruoyi.framework.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.framework.web.domain.BaseEntity;
 
 import javax.persistence.*;
-
 import java.util.Date;
 
 /**
@@ -14,56 +13,70 @@ import java.util.Date;
  * @author ricardo
  * @date 2019-03-09
  */
-@Entity
-@Table(name = "llc_document" )
-public class Document extends BaseEntity {
+
+public class DocumentInfor {
     private static final long serialVersionUID = 1L;
 
     /**
      * 文档id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id" )
     private Integer id;
     /**
      * 标题
      */
-    @Column(name = "title" )
     private String title;
     /**
      * 作者名称
      */
-    @Column(name = "author" )
     private String author;
     /**
      * 内容
      */
-    @Column(name = "content" )
     private String content;
     /**
      * 文档注释
      */
-    @Column(name = "infor" )
+
     private String infor;
     /**
      * 组别
      */
-    @Column(name = "model" )
+
     private String model;
     /**
      * 创建时间
      */
-    @Column(name = "create_time" )
+
     private Date createTime;
     /**
      * 更新时间
      */
-    @Column(name = "update_time" )
+
     private Date updateTime;
 
-    public Document() {
-        this.updateTime = new Date();
+    public DocumentInfor() {
+
+    }
+    public DocumentInfor(Document document) {
+        this.id = document.getId();
+        this.title = document.getTitle();
+        this.author = document.getAuthor();
+        //this.content = content;
+        this.infor = document.getInfor();
+        this.model = document.getModel();
+        this.createTime = document.getCreateTime();
+        this.updateTime = document.getUpdateTime();
+    }
+    public DocumentInfor(Integer id, String title, String author, String content,
+                         String infor, String model, Date createTime, Date updateTime) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.infor = infor;
+        this.model = model;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
     public void setId(Integer id) {
@@ -113,19 +126,19 @@ public class Document extends BaseEntity {
     public String getModel() {
         return model;
     }
-    @Override
+
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-    @Override
+
     public Date getCreateTime() {
         return createTime;
     }
-    @Override
+
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-    @Override
+
     public Date getUpdateTime() {
         return updateTime;
     }

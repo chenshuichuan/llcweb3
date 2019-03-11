@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              <if test="name != null  and name != '' "> and name = #{name}</if>
              <if test="content != null  and content != '' "> and content = #{content}</if>
              <if test="contact != null  and contact != '' "> and contact = #{contact}</if>
-             <if test="createTime != null "> and create_time = #{createTime}</if>
+             <!--<if test="createTime != null "> and create_time = #{createTime}</if>-->
              <if test="isView != null "> and is_view = #{isView}</if>
              <if test="ipAddress != null  and ipAddress != '' "> and ip_address = #{ipAddress}</if>
          </where>

@@ -1,6 +1,9 @@
 package com.ruoyi.project.llc.document.service;
 
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.llc.document.mapper.DocumentMapper;
@@ -41,6 +44,12 @@ public class DocumentServiceImpl implements IDocumentService
 	@Override
 	public List<Document> selectDocumentList(Document document)
 	{
+	    //怎么放开更多权限？比如让非admin的其他管理员也能有查看所有人的文档的权限？
+        if("admin".equals(ShiroUtils.getLoginName())){
+        }
+        else{
+            document.setAuthor(ShiroUtils.getLoginName());
+        }
 	    return documentMapper.selectDocumentList(document);
 	}
 	
@@ -53,7 +62,10 @@ public class DocumentServiceImpl implements IDocumentService
 	@Override
 	public int insertDocument(Document document)
 	{
-	    return documentMapper.insertDocument(document);
+		document.setAuthor(ShiroUtils.getLoginName());
+		document.setCreateTime(new Date());
+		document.setUpdateTime(new Date());
+		return documentMapper.insertDocument(document);
 	}
 	
 	/**
@@ -65,6 +77,9 @@ public class DocumentServiceImpl implements IDocumentService
 	@Override
 	public int updateDocument(Document document)
 	{
+        document.setAuthor(ShiroUtils.getLoginName());
+        document.setCreateTime(new Date());
+        document.setUpdateTime(new Date());
 	    return documentMapper.updateDocument(document);
 	}
 

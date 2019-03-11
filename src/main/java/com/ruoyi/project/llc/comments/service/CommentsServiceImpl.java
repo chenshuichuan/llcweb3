@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.comments.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,8 @@ public class CommentsServiceImpl implements ICommentsService
 	@Override
 	public int insertComments(Comments comments)
 	{
-	    return commentsMapper.insertComments(comments);
+	    comments.setCreateTime(new Date());
+		return commentsMapper.insertComments(comments);
 	}
 	
 	/**
@@ -65,7 +67,7 @@ public class CommentsServiceImpl implements ICommentsService
 	@Override
 	public int updateComments(Comments comments)
 	{
-	    return commentsMapper.updateComments(comments);
+		return commentsMapper.updateComments(comments);
 	}
 
 	/**

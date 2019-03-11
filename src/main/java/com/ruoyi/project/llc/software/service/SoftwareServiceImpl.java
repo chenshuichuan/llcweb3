@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.software.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,8 @@ public class SoftwareServiceImpl implements ISoftwareService
 	@Override
 	public int insertSoftware(Software software)
 	{
-	    return softwareMapper.insertSoftware(software);
+		software.setUpdateTime(new Date());
+		return softwareMapper.insertSoftware(software);
 	}
 	
 	/**
@@ -65,7 +67,8 @@ public class SoftwareServiceImpl implements ISoftwareService
 	@Override
 	public int updateSoftware(Software software)
 	{
-	    return softwareMapper.updateSoftware(software);
+		software.setUpdateTime(new Date());
+		return softwareMapper.updateSoftware(software);
 	}
 
 	/**

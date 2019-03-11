@@ -2,6 +2,7 @@ package com.ruoyi.project.system.files.domain;
 
 import com.ruoyi.framework.web.domain.BaseEntity;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -10,44 +11,88 @@ import java.util.Date;
  * @author yc
  * @date 2018-12-20
  */
+@Entity
+@Table(name = "sys_files" )
 public class Files extends BaseEntity
 {
 	private static final long serialVersionUID = 1L;
 	
 	/**  */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id" )
 	private Integer id;
 	/**  */
+	@Column(name = "url" )
 	private String url;
 	/**  */
+	@Column(name = "status" )
 	private String status;
 	/**  */
+	@Column(name = "file_name" )
 	private String fileName;
 	/**  */
+	@Column(name = "remark" )
 	private String remark;
 	/** 类型（0代表图片 1代表视频） */
+	@Column(name = "type" )
 	private String type;
 	/** 删除标志（0代表存在 2代表删除） */
+	@Column(name = "del_flag" )
 	private String delFlag;
 	/** 创建者 */
+	@Column(name = "create_by" )
 	private String createBy;
+	@Column(name = "create_by_name" )
 	private String createByName;
 	/** 创建时间 */
+	@Column(name = "create_time" )
 	private Date createTime;
 	/** 更新者 */
+	@Column(name = "update_by" )
 	private String updateBy;
+	@Column(name = "update_by_name" )
 	private String updateByName;
 	/** 更新时间 */
+	@Column(name = "update_time" )
 	private Date updateTime;
 
 	/**后缀**/
+	@Column(name = "suffix" )
 	private String suffix;
-
+	@Column(name = "content" )
 	private String content;
 
 	/**修改标识 0 新增 1 修改**/
+	@Transient
 	private int updateFlag;
-
+	@Transient
 	private Long channelId;
+
+	public Files() { this.updateTime = new Date();
+	}
+
+	public Files(String url, String status, String fileName, String remark, String type,
+				 String delFlag, String createBy, String createByName, Date createTime, String updateBy,
+				 String updateByName, Date updateTime, String suffix, String content,
+				 int updateFlag, Long channelId) {
+		this.url = url;
+		this.status = status;
+		this.fileName = fileName;
+		this.remark = remark;
+		this.type = type;
+		this.delFlag = delFlag;
+		this.createBy = createBy;
+		this.createByName = createByName;
+		this.createTime = createTime;
+		this.updateBy = updateBy;
+		this.updateByName = updateByName;
+		this.updateTime = updateTime;
+		this.suffix = suffix;
+		this.content = content;
+		this.updateFlag = updateFlag;
+		this.channelId = channelId;
+	}
 
 	public String getContent() {
 		return content;

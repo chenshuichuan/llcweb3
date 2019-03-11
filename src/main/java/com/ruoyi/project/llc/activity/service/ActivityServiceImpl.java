@@ -1,12 +1,16 @@
 package com.ruoyi.project.llc.activity.service;
 
+import java.util.Date;
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.llc.activity.mapper.ActivityMapper;
 import com.ruoyi.project.llc.activity.domain.Activity;
 import com.ruoyi.project.llc.activity.service.IActivityService;
 import com.ruoyi.common.support.Convert;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 活动管理 服务层实现
@@ -41,7 +45,12 @@ public class ActivityServiceImpl implements IActivityService
 	@Override
 	public List<Activity> selectActivityList(Activity activity)
 	{
-	    return activityMapper.selectActivityList(activity);
+//		if("admin".equals(ShiroUtils.getLoginName())){
+//		}
+//		else{
+//			activity.setAuthor(ShiroUtils.getLoginName());
+//		}
+		return activityMapper.selectActivityList(activity);
 	}
 	
     /**
@@ -51,9 +60,13 @@ public class ActivityServiceImpl implements IActivityService
      * @return 结果
      */
 	@Override
+	@Transactional
 	public int insertActivity(Activity activity)
 	{
-	    return activityMapper.insertActivity(activity);
+	    activity.setAuthor(ShiroUtils.getLoginName());
+	    activity.setCreateTime(new Date());
+	    activity.setUpdateTime(new Date());
+		return activityMapper.insertActivity(activity);
 	}
 	
 	/**
@@ -63,9 +76,13 @@ public class ActivityServiceImpl implements IActivityService
      * @return 结果
      */
 	@Override
+	@Transactional
 	public int updateActivity(Activity activity)
 	{
-	    return activityMapper.updateActivity(activity);
+		activity.setAuthor(ShiroUtils.getLoginName());
+		activity.setCreateTime(new Date());
+		activity.setUpdateTime(new Date());
+		return activityMapper.updateActivity(activity);
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class Patent extends BaseEntity {
 
     /**  */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
     private Integer id;
     /**

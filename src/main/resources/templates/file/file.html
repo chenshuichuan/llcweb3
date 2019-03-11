@@ -89,7 +89,7 @@
                         if (row.url != null) {
                             var url ="/profile/" +  row.fileName+"."+row.suffix;
                             if(row.type == "1") {//视频
-                                 s = '<video controls="controls" height="100px" width="200px" name="vi"> <source  type="video/mp4" src="'+url+'"/>Your browser does not support the video tag.</video>';
+                                 s = '<video controls="controls" height="100px" width="200px" name="vi"> <source  type="video/mp4" src="'+url+'"/>您的浏览器不支持该格式.</video>';
                             }else if(row.type == "0"){
                                 s = '<a class = "view"  href="javascript:void(0)"><img style="width:200px;height:100px;" src="' + url + '" /></a>';
 							}else{
@@ -105,8 +105,9 @@
                     sortable: true,
                     formatter:function(value,row,index) {
                         var s;
+                        var url ="/profile/" +  row.fileName+"."+row.suffix;
                         if (row.url != null) {
-                            s='<a href="/admin/file/getFileById?id='+row.id+'" style="width:200px;height:100px; text-align: center"> '+row.fileName+'</a>'
+                            s='<a target="_blank" href="'+url+'" style="width:200px;height:100px; text-align: center"> '+row.fileName+'</a>'
                         }
                         return s;
                     }

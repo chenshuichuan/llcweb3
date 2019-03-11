@@ -11,6 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 2019/3/10
  */
 public interface PatentRepository extends JpaRepository<Patent,Integer> {
-
-
+    Patent findBySourceFile(Integer sourceFile);
 }

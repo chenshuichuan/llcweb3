@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.project.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,7 @@ public class ProjectServiceImpl implements IProjectService
 	@Override
 	public int insertProject(Project project)
 	{
+		project.setUpdateTime(new Date());
 	    return projectMapper.insertProject(project);
 	}
 	
@@ -65,7 +67,8 @@ public class ProjectServiceImpl implements IProjectService
 	@Override
 	public int updateProject(Project project)
 	{
-	    return projectMapper.updateProject(project);
+		project.setUpdateTime(new Date());
+		return projectMapper.updateProject(project);
 	}
 
 	/**

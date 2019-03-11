@@ -92,8 +92,9 @@
             // 获取File引用:
             var file = fileInput.files[0];
             var str = file.name.split(".");
-            alert(str);
+            //alert(str);
             $("#fileName").val(str[0]);
+            $("#remark").val(str[0]);
             $("#suffix").val(str[str.length-1]);
         }
     });

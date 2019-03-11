@@ -37,12 +37,12 @@ public class MyFiles extends BaseEntity {
     /**
      * 文件名称
      */
-    @Column(name = "fileName" )
+    @Column(name = "file_name" )
     private String fileName;
     /**
      * 原始名称
      */
-    @Column(name = "originalName" )
+    @Column(name = "original_name" )
     private String originalName;
     /**
      * 注释
@@ -72,12 +72,12 @@ public class MyFiles extends BaseEntity {
     /**
      * 创建时间
      */
-    @Column(name = "createTime" )
+    @Column(name = "create_time" )
     private Date createTime;
     /**
      * 更新时间
      */
-    @Column(name = "updateTime" )
+    @Column(name = "update_time" )
     private Date updateTime;
 
     public MyFiles() {

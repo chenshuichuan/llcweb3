@@ -44,6 +44,11 @@ public class FilesServiceImpl implements IFilesService {
      */
     @Override
     public List<Files> selectFilesList(Files files) {
+        if("admin".equals(ShiroUtils.getLoginName())){
+        }
+        else{
+            files.setCreateByName(ShiroUtils.getLoginName());
+        }
         return filesMapper.selectFilesList(files);
     }
 
@@ -56,8 +61,8 @@ public class FilesServiceImpl implements IFilesService {
     @Override
     @Transactional
     public int insertFiles(Files files) {
-        files.setCreateBy(ShiroUtils.getLoginName());
-        files.setCreateByName(ShiroUtils.getSysUser().getUserName());
+        files.setCreateBy(ShiroUtils.getSysUser().getUserName());
+        files.setCreateByName(ShiroUtils.getLoginName());
         return filesMapper.insertFiles(files);
     }
 
