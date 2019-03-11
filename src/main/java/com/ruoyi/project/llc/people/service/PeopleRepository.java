@@ -11,6 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 2019/3/10
  */
 public interface PeopleRepository extends JpaRepository<People,Integer> {
-
-
+    People findByName(String name);
 }

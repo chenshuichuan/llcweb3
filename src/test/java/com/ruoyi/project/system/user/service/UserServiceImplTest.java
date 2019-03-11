@@ -7,6 +7,7 @@ import com.ruoyi.project.system.files.domain.Files;
 import com.ruoyi.project.system.files.service.FilesRepository;
 import com.ruoyi.project.system.files.service.IFilesService;
 import com.ruoyi.project.system.user.domain.User;
+import com.ruoyi.project.system.user.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class UserServiceImplTest {
     private FilesRepository filesRepository;
     @Autowired
     private IFilesService filesService;
-
+    @Autowired
+    private UserMapper userMapper;
     @Test
     public void addUser(){
         List<People> peopleList = peopleRepository.findAll();
@@ -71,6 +73,22 @@ public class UserServiceImplTest {
             user.setRemark(people.getName());
 
             userService.insertUser(user);
+        }
+    }
+    @Test
+    public void updateUser(){
+        List<People> peopleList = peopleRepository.findAll();
+        for (People people: peopleList){
+
+            User user = userService.selectUserByLoginName(people.getName());
+            if(user !=null){
+                System.out.println("user = "+user.getLoginName());
+                Files files = filesService.selectFilesById(people.getPortrait());
+                if(files!=null){
+                    user.setAvatar(files.getFileName()+"."+files.getSuffix());
+                }
+                userMapper.updateUser(user);
+            }
         }
     }
 }

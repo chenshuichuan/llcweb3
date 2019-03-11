@@ -67,7 +67,15 @@ public class DocumentController extends BaseController
         ExcelUtil<Document> util = new ExcelUtil<Document>(Document.class);
         return util.exportExcel(list, "document");
     }
-	
+	/**
+	 * 获取文档
+	 */
+	@GetMapping("/{id}")
+	@ResponseBody
+	public Document getDocument(@PathVariable("id") Integer id)
+	{
+		return documentService.selectDocumentById(id);
+	}
 	/**
 	 * 新增文档管理
 	 */

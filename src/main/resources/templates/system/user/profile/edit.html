@@ -2,6 +2,8 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<link th:href="@{/admin/ajax/libs/summernote/summernote.css}" rel="stylesheet"/>
+<link th:href="@{/admin/ajax/libs/summernote/summernote-bs3.css}" rel="stylesheet"/>
 <body class="white-bg">
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-user-edit" th:object="${user}">
@@ -27,7 +29,7 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">邮箱：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="email" th:field="*{email}">
+					<input id="user-email" class="form-control" type="text" name="email" th:field="*{email}">
 				</div>
 			</div>
 			<div class="form-group">
@@ -37,24 +39,70 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-3 control-label">性别：</label>
-				<div class="col-sm-8">
-					<div class="radio-box">
-						<input type="radio" id="radio1" th:field="*{sex}" name="sex" value="0">
-						<label for="radio1">男</label>
-					</div>
-					<div class="radio-box">
-						<input type="radio" id="radio2" th:field="*{sex}" name="sex" value="1">
-						<label for="radio2">女</label>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">性别：</label>
+					<div class="col-sm-8">
+						<select id="user-sex" name="sex" th:field="*{sex}" class="form-control" th:with="type=${@dict.getType('sys_user_sex')}">
+							<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+						</select>
 					</div>
 				</div>
 			</div>
-			
+		</form>
+
+		<form class="form-horizontal m" id="form-people-edit" th:if="${people} ne null">
+			<input name="id"  type="hidden"  th:field="*{people.id}" />
+			<input name="name"  type="hidden"  th:field="*{people.name}" />
+			<input id="phone" name="phone"  type="hidden"  th:field="*{people.phone}" />
+			<input id="email" name="email"  type="hidden"  th:field="*{people.email}" />
+			<input id="portrait" name="portrait"  type="hidden"  th:field="*{people.portrait}" />
+			<input id="sex" name="sex"  type="hidden"  th:field="*{people.sex}" />
+			<input id="academicTitle" name="academicTitle"  type="hidden"  th:field="*{people.academicTitle}" />
+			<input id="adminPosition" name="adminPosition"  type="hidden"  th:field="*{people.adminPosition}" />
+			<div class="form-group">
+				<label class="col-sm-3 control-label">职位：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="position" id="position" th:field="*{people.position}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">研究方向：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="researchField" id="researchField" th:field="*{people.researchField}">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">学历：</label>
+				<div class="col-sm-8">
+					<input class="form-control" type="text" name="highestDegree" id="highestDegree" th:field="*{people.highestDegree}">
+				</div>
+			</div>
+		</form>
+
+		<form class="form-horizontal m" id="form-document-edit" th:if="${document} ne null">
+			<input name="id"  type="hidden"  th:field="*{document.id}" />
+			<input name="title"  type="hidden"  th:field="*{document.title}" />
+			<input name="author"  type="hidden"  th:field="*{document.author}" />
+			<input name="infor"  type="hidden"  th:field="*{document.infor}" />
+			<input name="model"  type="hidden"  th:field="*{document.model}" />
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label">个人简介：</label>
+				<div class="col-sm-8">
+					<input id="content" name="content" th:field="*{document.content}" class="form-control" type="hidden">
+					<div id="editor" class="summernote"></div>
+				</div>
+			</div>
 		</form>
 	</div>
 	<div th:include="include::footer"></div>
+	<script th:src="@{/admin/ajax/libs/summernote/summernote.min.js}"></script>
+	<script th:src="@{/admin/ajax/libs/summernote/summernote-zh-CN.js}"></script>
 	<script>
         ctx = ctx+webPrefix+"/";
+        var userPrefix = ctx + "system/user/profile/update";
+        var documentPrefix = ctx + "system/user/profile/updatePeople";
+        var peoplePrefix = ctx + "system/user/profile/updateDocument";
 
 		$("#form-user-edit").validate({
 			rules:{
@@ -114,9 +162,33 @@
 		
 		function submitHandler() {
 	        if ($.validate.form()) {
-	        	$.operate.save(ctx + "system/user/profile/update", $('#form-user-edit').serialize());
+                $("#email").val($("#user-email").val());
+                $("#phone").val($("#phonenumber").val());
+	            $("#sex").val($("#user-sex").val());
+	        	$.operate.save(userPrefix, $('#form-user-edit').serialize());
 	        }
+
+            if ($.validate.form()) {
+                $.operate.save(peoplePrefix , $('#form-people-edit').serialize());
+            }
+
+            var sHTML = $('.summernote').code();
+            $("#content").val(sHTML);
+            if ($.validate.form()) {
+                $.operate.save(documentPrefix , $('#form-document-edit').serialize());
+            }
 	    }
+
+
+        $(function() {
+            $('.summernote').summernote({
+                height : '400px',
+                width: '800px',
+                lang : 'zh-CN'
+            });
+            var content = $("#content").val();
+            $('#editor').code(content);
+        });
 	</script>
 </body>
 </html>

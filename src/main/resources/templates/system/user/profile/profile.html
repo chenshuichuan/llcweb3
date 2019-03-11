@@ -15,28 +15,27 @@
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
         <div class="row animated fadeInRight">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>个人信息</h5>
-                    <div class="ibox-tools">
-                        
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="javascript:edit()">修改信息</a></li>
-                            <li><a href="javascript:resetPwd()">修改密码</a></li>
-                            <li><a href="javascript:avatar()">修改头像</a></li>
-                        </ul>
-                       
-                    </div>
+                        <div class="ibox-tools">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="profile.html#">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="javascript:edit()">修改信息</a></li>
+                                <li><a href="javascript:resetPwd()">修改密码</a></li>
+                                <li><a href="javascript:avatar()">修改头像</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="contact-box">
 	                        <div class="col-sm-4">
 	                            <div class="text-center">
 	                                <img alt="image" class="img-circle m-t-xs img-responsive" th:src="(${user.avatar} == '') ? @{/img/profile.jpg} : @{/profile/avatar/} + ${user.avatar}">
-	                                <div class="m-t-xs font-bold">[[${user.loginIp}]]</div>
+	                                <div class="m-t-xs font-bold">当前头像仅在管理平台使用</div>
+                                    <div class="m-t-xs font-bold">[[${user.loginIp}]]</div>
 	                            </div>
 	                        </div>
 	                        <div class="col-sm-8">
@@ -47,9 +46,25 @@
 	                            <p><i class="fa fa-transgender"></i> 性别：[[${user.sex}]]</p>
 	                            <p><i class="fa fa-envelope-o"></i> [[${user.email}]]</p>
 	                            <p><i class="fa fa-calendar"></i> [[${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}]]</p>
+                                <div th:if="${people} ne null">
+                                    <p>职位：<span th:text="${people.position}"></span></p>
+                                    <p th:if="${people.position == '研究生'}">年级：<span th:text="${people.grade}"></span></p>
+                                    <p>研究方向：<span th:text="${people.researchField}"></span></p>
+                                    <p>最高学历：<span th:text="${people.highestDegree}"></span></p>
+                                </div>
 	                        </div>
 	                        <div class="clearfix"></div>
 	                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6" th:if="${people} ne null and ${people.position} != '研究生'">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>个人简介</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="div-introduction"></div>
                     </div>
                 </div>
             </div>
@@ -57,6 +72,12 @@
     </div>
     
     <div th:include="include::footer"></div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        //拿到模型列表
+        var people = /*[[${people}]]*/ 2;
+        /*]]>*/
+    </script>
     <script>
         ctx = ctx+webPrefix+"/";
         var userId = [[${user.userId}]];
@@ -75,6 +96,32 @@
 	        var url = ctx + 'system/user/profile/avatar/' + userId;
 	        $.modal.open("修改头像", url);
 	    }
+
+        $(document).ready(function () {
+            if(people!=null && people!==2){
+                //获得简介内容
+                var urlGetDocumentById=ctx+"llc/document/"+people.introduction;
+                var document = getDocumentById(urlGetDocumentById);
+                var content = document.content;
+                if(content==null||content==undefined)$("#div-introduction").html("<p style='color: #e1261a;'>未获取到简介！</p>");
+                $("#div-introduction").html(document.content);
+            }
+        });
+        //根据id获取document信息
+        function getDocumentById(urlGetDocumentById) {
+            var document =null;
+            //设置同步
+            $.ajax({
+                type : "get",
+                url : urlGetDocumentById,
+                data :'',
+                async : false,
+                success : function(data){
+                    document = data;
+                }
+            });
+            return document;
+        }
 	</script>
 </body>
 </html>

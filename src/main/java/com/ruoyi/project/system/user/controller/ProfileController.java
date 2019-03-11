@@ -7,6 +7,11 @@ import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.framework.web.controller.BaseController;
 import com.ruoyi.framework.web.domain.AjaxResult;
 import com.ruoyi.framework.web.service.DictService;
+import com.ruoyi.project.llc.document.domain.Document;
+import com.ruoyi.project.llc.document.service.IDocumentService;
+import com.ruoyi.project.llc.people.domain.People;
+import com.ruoyi.project.llc.people.service.IPeopleService;
+import com.ruoyi.project.llc.people.service.PeopleRepository;
 import com.ruoyi.project.system.user.domain.User;
 import com.ruoyi.project.system.user.service.IUserService;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -36,7 +41,12 @@ public class ProfileController extends BaseController
 
     @Autowired
     private DictService dict;
-
+    @Autowired
+    private PeopleRepository peopleRepository;
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private IPeopleService peopleService;
     /**
      * 个人信息
      */
@@ -44,8 +54,14 @@ public class ProfileController extends BaseController
     public String profile(ModelMap mmap)
     {
         User user = getSysUser();
+        People people = peopleRepository.findByName(user.getLoginName());
+//        if(people!=null&&people.getId()>0){
+//
+//        }
+
         user.setSex(dict.getLabel("sys_user_sex", user.getSex()));
         mmap.put("user", user);
+        mmap.put("people",people);
         mmap.put("roleGroup", userService.selectUserRoleGroup(user.getUserId()));
         mmap.put("postGroup", userService.selectUserPostGroup(user.getUserId()));
         return prefix + "/profile";
@@ -91,7 +107,17 @@ public class ProfileController extends BaseController
     @GetMapping("/edit/{userId}")
     public String edit(@PathVariable("userId") Long userId, ModelMap mmap)
     {
-        mmap.put("user", userService.selectUserById(userId));
+        User user = userService.selectUserById(userId);
+        People people = peopleRepository.findByName(user.getLoginName());
+        if(people!=null && people.getIntroduction()>0){
+
+            Document document = documentService.selectDocumentById(people.getIntroduction());
+            if(document!=null){
+                mmap.put("document", document);
+            }
+        }
+        mmap.put("people", people);
+        mmap.put("user", user);
         return prefix + "/edit";
     }
 
@@ -149,5 +175,34 @@ public class ProfileController extends BaseController
             log.error("修改头像失败！", e);
             return error(e.getMessage());
         }
+    }
+    /**
+     * 修改people
+     */
+    @Log(title = "个人people信息", businessType = BusinessType.UPDATE)
+    @PostMapping("/updatePeople")
+    @ResponseBody
+    public AjaxResult updatePeople(People people)
+    {
+        People people1 = peopleService.selectPeopleById(people.getId());
+        if (people1!=null&& peopleService.updatePeople(people)>0) {
+            return success();
+        }
+        return error();
+    }
+
+    /**
+     * 修改people
+     */
+    @Log(title = "个人document信息", businessType = BusinessType.UPDATE)
+    @PostMapping("/updateDocument")
+    @ResponseBody
+    public AjaxResult updateDocument(Document document)
+    {
+        Document document1 = documentService.selectDocumentById(document.getId());
+        if (document1!=null&& documentService.updateDocument(document)>0) {
+            return success();
+        }
+        return error();
     }
 }
