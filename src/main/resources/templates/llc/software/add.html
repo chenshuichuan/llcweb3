@@ -24,7 +24,9 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">摘要：</label>
 				<div class="col-sm-8">
-					<input id="introduction" name="introduction" class="form-control" type="text">
+					<select id="introduction" name="introduction" class="form-control">
+						<option th:each="document,iterStat : ${documentList}" th:text="${document.title}" th:value="${document.id}"></option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	
@@ -36,7 +38,10 @@
 			<div class="form-group">	
 				<label class="col-sm-3 control-label">关联的文件id：</label>
 				<div class="col-sm-8">
-					<input id="sourceFile" name="sourceFile" class="form-control" type="text">
+					<select id="sourceFile" name="sourceFile"  class="form-control">
+						<option th:each="file,iterStat : ${filesList}" th:text="${file.FileName}"
+								th:value="${file.id}"></option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">	

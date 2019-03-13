@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectPlatformVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="name != null  and name != '' "> and name like concat('%',#{name},'%')</if>
              <if test="address != null  and address != '' "> and address = #{address}</if>
              <if test="videoAddress != null  and videoAddress != '' "> and video_address = #{videoAddress}</if>
              <if test="coverImage != null  and coverImage != '' "> and cover_image = #{coverImage}</if>

@@ -1,6 +1,10 @@
 package com.ruoyi.project.llc.people.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.project.llc.document.service.IDocumentService;
+import com.ruoyi.project.system.files.service.IFilesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,107 +25,104 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * 人员管理 信息操作处理
- * 
+ *
  * @author ricardo
  * @date 2019-03-09
  */
 @Controller
 @RequestMapping("/admin/llc/people")
-public class PeopleController extends BaseController
-{
+public class PeopleController extends BaseController {
     private String prefix = "llc/people";
-	
-	@Autowired
-	private IPeopleService peopleService;
-	
-	@RequiresPermissions("llc:people:view")
-	@GetMapping()
-	public String people()
-	{
-	    return prefix + "/people";
-	}
-	
-	/**
-	 * 查询人员管理列表
-	 */
-	@RequiresPermissions("llc:people:list")
-	@PostMapping("/list")
-	@ResponseBody
-	public TableDataInfo list(People people)
-	{
-		startPage();
+
+    @Autowired
+    private IPeopleService peopleService;
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private IFilesService filesService;
+
+    @RequiresPermissions("llc:people:view")
+    @GetMapping()
+    public String people() {
+        return prefix + "/people";
+    }
+
+    /**
+     * 查询人员管理列表
+     */
+    @RequiresPermissions("llc:people:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(People people) {
+        startPage();
         List<People> list = peopleService.selectPeopleList(people);
-		return getDataTable(list);
-	}
-	
-	
-	/**
-	 * 导出人员管理列表
-	 */
-	@RequiresPermissions("llc:people:export")
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 导出人员管理列表
+     */
+    @RequiresPermissions("llc:people:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(People people)
-    {
-    	List<People> list = peopleService.selectPeopleList(people);
+    public AjaxResult export(People people) {
+        List<People> list = peopleService.selectPeopleList(people);
         ExcelUtil<People> util = new ExcelUtil<People>(People.class);
         return util.exportExcel(list, "people");
     }
-	
-	/**
-	 * 新增人员管理
-	 */
-	@GetMapping("/add")
-	public String add()
-	{
-	    return prefix + "/add";
-	}
-	
-	/**
-	 * 新增保存人员管理
-	 */
-	@RequiresPermissions("llc:people:add")
-	@Log(title = "人员管理", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(People people)
-	{		
-		return toAjax(peopleService.insertPeople(people));
-	}
 
-	/**
-	 * 修改人员管理
-	 */
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
-	{
-		People people = peopleService.selectPeopleById(id);
-		mmap.put("people", people);
-	    return prefix + "/edit";
-	}
-	
-	/**
-	 * 修改保存人员管理
-	 */
-	@RequiresPermissions("llc:people:edit")
-	@Log(title = "人员管理", businessType = BusinessType.UPDATE)
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(People people)
-	{		
-		return toAjax(peopleService.updatePeople(people));
-	}
-	
-	/**
-	 * 删除人员管理
-	 */
-	@RequiresPermissions("llc:people:remove")
-	@Log(title = "人员管理", businessType = BusinessType.DELETE)
-	@PostMapping( "/remove")
-	@ResponseBody
-	public AjaxResult remove(String ids)
-	{		
-		return toAjax(peopleService.deletePeopleByIds(ids));
-	}
-	
+    /**
+     * 新增人员管理
+     */
+    @GetMapping("/add")
+    public String add(ModelMap mmap) {
+        mmap.put("documentList", documentService.getDocumentByAuthor(ShiroUtils.getLoginName()));
+        mmap.put("FilesList", filesService.findByCreateByName(ShiroUtils.getLoginName()));
+        return prefix + "/add";
+    }
+
+    /**
+     * 新增保存人员管理
+     */
+    @RequiresPermissions("llc:people:add")
+    @Log(title = "人员管理", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(People people) {
+        return toAjax(peopleService.insertPeople(people));
+    }
+
+    /**
+     * 修改人员管理
+     */
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
+        People people = peopleService.selectPeopleById(id);
+        mmap.put("people", people);
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存人员管理
+     */
+    @RequiresPermissions("llc:people:edit")
+    @Log(title = "人员管理", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(People people) {
+        return toAjax(peopleService.updatePeople(people));
+    }
+
+    /**
+     * 删除人员管理
+     */
+    @RequiresPermissions("llc:people:remove")
+    @Log(title = "人员管理", businessType = BusinessType.DELETE)
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids) {
+        return toAjax(peopleService.deletePeopleByIds(ids));
+    }
+
 }

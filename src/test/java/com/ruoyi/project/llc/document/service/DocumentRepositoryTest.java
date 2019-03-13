@@ -2,7 +2,6 @@ package com.ruoyi.project.llc.document.service;
 
 import com.ruoyi.project.llc.document.domain.Document;
 import com.ruoyi.project.llc.document.domain.DocumentInfor;
-import com.ruoyi.project.llc.document1.service.IDocument1Service;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

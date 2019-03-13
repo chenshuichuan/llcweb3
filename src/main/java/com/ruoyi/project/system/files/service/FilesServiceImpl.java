@@ -24,7 +24,8 @@ import java.util.List;
 public class FilesServiceImpl implements IFilesService {
     @Autowired
     private FilesMapper filesMapper;
-
+    @Autowired
+    private FilesRepository filesRepository;
     /**
      * 查询文件上传信息
      *
@@ -137,6 +138,11 @@ public class FilesServiceImpl implements IFilesService {
         List<Files> list = filesMapper.selectFilesListNoSave(files);
 
         return list;
+    }
+
+    @Override
+    public List<Files> findByCreateByName(String name) {
+        return filesRepository.findByCreateByName(name);
     }
 
 }

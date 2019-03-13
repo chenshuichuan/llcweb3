@@ -1,6 +1,9 @@
 package com.ruoyi.project.llc.document.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.project.llc.document.domain.DocumentInfor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +54,8 @@ public class DocumentController extends BaseController
 	{
 		startPage();
         List<Document> list = documentService.selectDocumentList(document);
-		return getDataTable(list);
+        List<DocumentInfor> documentInforList = documentService.documentToDocuemntInfor(list);
+		return getDataTable(documentInforList);
 	}
 	
 	
@@ -67,6 +71,15 @@ public class DocumentController extends BaseController
         ExcelUtil<Document> util = new ExcelUtil<Document>(Document.class);
         return util.exportExcel(list, "document");
     }
+	/**
+	 * 获取文档
+	 */
+	@GetMapping("/getDocumentList")
+	@ResponseBody
+	public List<DocumentInfor> getDocumentList()
+	{
+		return documentService.getDocumentByAuthor(ShiroUtils.getLoginName());
+	}
 	/**
 	 * 获取文档
 	 */
@@ -131,5 +144,7 @@ public class DocumentController extends BaseController
 	{		
 		return toAjax(documentService.deleteDocumentByIds(ids));
 	}
+
+
 	
 }

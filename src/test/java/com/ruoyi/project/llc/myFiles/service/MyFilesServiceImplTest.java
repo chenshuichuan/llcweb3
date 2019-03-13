@@ -2,12 +2,6 @@ package com.ruoyi.project.llc.myFiles.service;
 
 import com.ruoyi.project.llc.document.service.DocumentRepository;
 import com.ruoyi.project.llc.document.service.IDocumentService;
-import com.ruoyi.project.llc.document1.service.Document1Repository;
-import com.ruoyi.project.llc.document1.service.IDocument1Service;
-import com.ruoyi.project.llc.images.service.IImagesService;
-import com.ruoyi.project.llc.images.service.ImagesRepository;
-import com.ruoyi.project.llc.myFiles.domain.MyFiles;
-import com.ruoyi.project.llc.paper.domain.Paper;
 import com.ruoyi.project.llc.paper.service.PaperRepository;
 import com.ruoyi.project.llc.patent.domain.Patent;
 import com.ruoyi.project.llc.patent.service.IPatentService;
@@ -50,15 +44,6 @@ public class MyFilesServiceImplTest {
     @Autowired
     private IFilesService filesService;
     @Autowired
-    private ImagesRepository imagesRepository;
-    @Autowired
-    private IImagesService imagesService;
-
-    @Autowired
-    private MyFilesRepository myFilesRepository;
-    @Autowired
-    private IMyFilesService myFilesService;
-    @Autowired
     private PatentRepository patentRepository;
     @Autowired
     private IPatentService patentService;
@@ -76,59 +61,55 @@ public class MyFilesServiceImplTest {
     private DocumentRepository documentRepository;
     @Autowired
     private IDocumentService documentService;
-    @Autowired
-    private Document1Repository document1Repository;
-    @Autowired
-    private IDocument1Service document1Service;
 
-    @Test
-    public void filesToFiles() {
-        List<MyFiles> myFilesList = myFilesRepository.findAll();
-        for (MyFiles myFiles : myFilesList) {
-            Files f2 = new Files();
-            f2.setFileName(myFiles.getFileName());
-
-            //f2.setId(myFiles.getId());
-            f2.setUrl("D:/temp/" + myFiles.getFileName() + "." + myFiles.getSuffix());
-            f2.setStatus(myFiles.getStatus());
-            f2.setFileName(myFiles.getFileName());
-            f2.setRemark(myFiles.getOriginalName());
-            f2.setContent(myFiles.getContent());
-
-            f2.setSuffix(myFiles.getSuffix());
-            f2.setType(Integer.toString(2));
-            f2.setDelFlag("0");
-            f2.setCreateBy(myFiles.getAuthor());
-            f2.setCreateByName(myFiles.getAuthor());
-            f2.setUpdateBy(myFiles.getAuthor());
-            f2.setUpdateByName(myFiles.getAuthor());
-            f2.setCreateTime(myFiles.getCreateTime());
-            f2.setUpdateTime(myFiles.getUpdateTime());
-            System.out.println("myFilesId = " + myFiles.getId());
-            Files files = filesRepository.save(f2);
-
-            if (files != null && files.getId() > 0) {
-                Project project = projectRepository.findByIntroductionFile(myFiles.getId());
-                if (project != null) {
-                    System.out.println("oid-" + myFiles.getId() + ": nid-" + files.getId());
-                    project.setIntroductionFile(files.getId());
-                    projectRepository.save(project);
-                    System.out.println(project);
-                } else {
-                    System.out.println("文件无映射：" + myFiles);
-//                    Paper paper = paperRepository.findBySourceFile(myFiles.getId());
-//                    if (paper != null) {
-//                        System.out.println("oid-" + myFiles.getId() + ": nid-" + files.getId());
-//                        paper.setSourceFile(files.getId());
-//                        paperRepository.save(paper);
-//                        System.out.println(paper);
-//                    } else {
+//    @Test
+//    public void filesToFiles() {
+//        List<MyFiles> myFilesList = myFilesRepository.findAll();
+//        for (MyFiles myFiles : myFilesList) {
+//            Files f2 = new Files();
+//            f2.setFileName(myFiles.getFileName());
 //
-//                    }
-                }
-            }
-        }
-    }
+//            //f2.setId(myFiles.getId());
+//            f2.setUrl("D:/temp/" + myFiles.getFileName() + "." + myFiles.getSuffix());
+//            f2.setStatus(myFiles.getStatus());
+//            f2.setFileName(myFiles.getFileName());
+//            f2.setRemark(myFiles.getOriginalName());
+//            f2.setContent(myFiles.getContent());
+//
+//            f2.setSuffix(myFiles.getSuffix());
+//            f2.setType(Integer.toString(2));
+//            f2.setDelFlag("0");
+//            f2.setCreateBy(myFiles.getAuthor());
+//            f2.setCreateByName(myFiles.getAuthor());
+//            f2.setUpdateBy(myFiles.getAuthor());
+//            f2.setUpdateByName(myFiles.getAuthor());
+//            f2.setCreateTime(myFiles.getCreateTime());
+//            f2.setUpdateTime(myFiles.getUpdateTime());
+//            System.out.println("myFilesId = " + myFiles.getId());
+//            Files files = filesRepository.save(f2);
+//
+//            if (files != null && files.getId() > 0) {
+//                Project project = projectRepository.findByIntroductionFile(myFiles.getId());
+//                if (project != null) {
+//                    System.out.println("oid-" + myFiles.getId() + ": nid-" + files.getId());
+//                    project.setIntroductionFile(files.getId());
+//                    projectRepository.save(project);
+//                    System.out.println(project);
+//                } else {
+//                    System.out.println("文件无映射：" + myFiles);
+////                    Paper paper = paperRepository.findBySourceFile(myFiles.getId());
+////                    if (paper != null) {
+////                        System.out.println("oid-" + myFiles.getId() + ": nid-" + files.getId());
+////                        paper.setSourceFile(files.getId());
+////                        paperRepository.save(paper);
+////                        System.out.println(paper);
+////                    } else {
+////
+////                    }
+//                }
+//            }
+//        }
+//    }
 
     @Test
     public void testServerAdd2(){

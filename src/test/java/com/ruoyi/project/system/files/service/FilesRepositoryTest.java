@@ -2,12 +2,6 @@ package com.ruoyi.project.system.files.service;
 
 import com.ruoyi.project.llc.document.domain.Document;
 import com.ruoyi.project.llc.document.service.DocumentRepository;
-import com.ruoyi.project.llc.document1.domain.Document1;
-import com.ruoyi.project.llc.document1.service.Document1Repository;
-import com.ruoyi.project.llc.images.domain.Images;
-import com.ruoyi.project.llc.images.service.ImagesRepository;
-import com.ruoyi.project.llc.myFiles.domain.MyFiles;
-import com.ruoyi.project.llc.myFiles.service.MyFilesRepository;
 import com.ruoyi.project.llc.patent.domain.Patent;
 import com.ruoyi.project.llc.patent.service.PatentRepository;
 import com.ruoyi.project.llc.software.domain.Software;
@@ -39,18 +33,12 @@ public class FilesRepositoryTest {
     @Autowired
     private FilesRepository filesRepository;
     @Autowired
-    private ImagesRepository imagesRepository;
-    @Autowired
-    private MyFilesRepository myFilesRepository;
-    @Autowired
     private PatentRepository patentRepository;
     @Autowired
     private SoftwareRepository softwareRepository;
 
     @Autowired
     private DocumentRepository documentRepository;
-    @Autowired
-    private Document1Repository document1Repository;
 
     @Test
     public void testAdd(){
@@ -116,104 +104,43 @@ public class FilesRepositoryTest {
     }
 
     @Test
-    public void testImages(){
-        List<Images> objects = imagesRepository.findAll();
-        Assert.assertThat(objects,notNullValue());
-        Assert.assertThat(objects.size(),greaterThan(0));
-        System.out.println("find size = "+objects.size());
-    }
-    @Test
     public void testDocument(){
         List<Document> objects = documentRepository.findAll();
         Assert.assertThat(objects,notNullValue());
         Assert.assertThat(objects.size(),greaterThan(0));
         System.out.println("find size = "+objects.size());
     }
+//    @Test
+//    public void testDocument1(){
+//        List<Document1> objects = document1Repository.findAll();
+//        Assert.assertThat(objects,notNullValue());
+//        Assert.assertThat(objects.size(),greaterThan(0));
+//        System.out.println("find size = "+objects.size());
+//    }
+//    @Test
+//    public void d2d(){
+//        List<Document1> objects = document1Repository.findAll();
+//        for (Document1 doc:objects){
+//
+//            Document document = new Document();
+//            document.setId(doc.getId());
+//            document.setAuthor(doc.getAuthor());
+//            document.setContent(doc.getContent());
+//            document.setCreateTime(doc.getCreateDate());
+//            document.setInfor(doc.getInfor());
+//            document.setModel(doc.getModel());
+//            document.setTitle(doc.getTitle());
+//            document.setUpdateTime(doc.getModifyDate());
+//
+//            documentRepository.save(document);
+//        }
+//    }
     @Test
-    public void testDocument1(){
-        List<Document1> objects = document1Repository.findAll();
+    public void testCreateByName(){
+        List<Files> objects = filesRepository.findByCreateByName("admin");
         Assert.assertThat(objects,notNullValue());
         Assert.assertThat(objects.size(),greaterThan(0));
         System.out.println("find size = "+objects.size());
-    }
-    @Test
-    public void d2d(){
-        List<Document1> objects = document1Repository.findAll();
-        for (Document1 doc:objects){
-
-            Document document = new Document();
-            document.setId(doc.getId());
-            document.setAuthor(doc.getAuthor());
-            document.setContent(doc.getContent());
-            document.setCreateTime(doc.getCreateDate());
-            document.setInfor(doc.getInfor());
-            document.setModel(doc.getModel());
-            document.setTitle(doc.getTitle());
-            document.setUpdateTime(doc.getModifyDate());
-
-            documentRepository.save(document);
-        }
-    }
-    @Test
-    public void imagesToFiles(){
-        List<Images> imagesList  = imagesRepository.findAll();
-        for(Images images: imagesList){
-
-            Files files = new Files();
-            files.setId(images.getId());
-            files.setUrl("D:/temp/"+images.getFileName()+"."+images.getSuffix());
-
-            files.setStatus(images.getStatus());
-            files.setFileName(images.getFileName());
-            files.setRemark(images.getRemark());
-            files.setContent(images.getContent());
-
-            files.setSuffix(images.getSuffix());
-            files.setType(Integer.toString(images.getType()));
-            files.setDelFlag("0");
-            files.setCreateBy(images.getAuthor());
-            files.setCreateByName(images.getAuthor());
-            files.setUpdateBy(images.getAuthor());
-            files.setUpdateByName(images.getAuthor());
-
-            files.setCreateTime(images.getCreateTime());
-            files.setUpdateTime(images.getUpdateTime());
-
-            filesRepository.save(files);
-        }
-
-    }
-
-    @Test
-    public void myFilesToFiles(){
-        List<MyFiles> myFilesList  = myFilesRepository.findAll();
-        for(MyFiles images: myFilesList){
-
-            Files files = new Files();
-            files.setId(images.getId());
-            files.setUrl("D:/temp/"+images.getFileName()+"."+images.getSuffix());
-
-            files.setStatus(images.getStatus());
-            files.setFileName(images.getFileName());
-            files.setRemark(images.getRemark());
-            files.setContent(images.getContent());
-
-            files.setSuffix(images.getSuffix());
-            files.setType(Integer.toString(images.getType()));
-            files.setDelFlag("0");
-            files.setCreateBy(images.getAuthor());
-            files.setCreateByName(images.getAuthor());
-            files.setUpdateBy(images.getAuthor());
-            files.setUpdateByName(images.getAuthor());
-
-            files.setCreateTime(images.getCreateTime());
-            files.setUpdateTime(images.getUpdateTime());
-
-            Files files1 = filesRepository.save(files);
-            if(files1!=null){
-
-            }
-        }
     }
 
 }

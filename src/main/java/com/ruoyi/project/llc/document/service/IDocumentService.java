@@ -1,6 +1,8 @@
 package com.ruoyi.project.llc.document.service;
 
 import com.ruoyi.project.llc.document.domain.Document;
+import com.ruoyi.project.llc.document.domain.DocumentInfor;
+
 import java.util.List;
 
 /**
@@ -50,5 +52,12 @@ public interface IDocumentService
      * @return 结果
      */
 	public int deleteDocumentByIds(String ids);
+
+	/**
+	 * document to documentInfor
+	 */
+	public List<DocumentInfor> documentToDocuemntInfor(List<Document> documentList);
+
+	List<DocumentInfor> getDocumentByAuthor(String author);
 	
 }

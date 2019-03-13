@@ -36,23 +36,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectProjectVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="name != null  and name != '' "> and name like concat('%',#{name},'%')</if>
              <if test="requireNum != null  and requireNum != '' "> and require_num = #{requireNum}</if>
-             <if test="introduction != null "> and introduction = #{introduction}</if>
-             <if test="introductionFile != null "> and introduction_file = #{introductionFile}</if>
+             <!--<if test="introduction != null "> and introduction = #{introduction}</if>-->
+             <!--<if test="introductionFile != null "> and introduction_file = #{introductionFile}</if>-->
              <if test="status != null  and status != '' "> and status = #{status}</if>
-             <if test="researchField != null  and researchField != '' "> and research_field = #{researchField}</if>
-             <if test="money != null  and money != '' "> and money = #{money}</if>
+             <if test="researchField != null  and researchField != '' "> and research_field like concat('%',#{researchField},'%')</if>
+             <!--<if test="money != null  and money != '' "> and money = #{money}</if>-->
              <!-- <if test="startDate != null "> and start_date = #{startDate}</if>-->
              <!-- <if test="endDate != null "> and end_date = #{endDate}</if>-->
-             <if test="responsiblePerson != null  and responsiblePerson != '' "> and responsible_person = #{responsiblePerson}</if>
+             <if test="responsiblePerson != null  and responsiblePerson != '' "> and responsible_person like concat('%',#{responsiblePerson},'%')</if>
              <if test="projectType != null  and projectType != '' "> and project_type = #{projectType}</if>
-             <if test="members != null  and members != '' "> and members = #{members}</if>
-             <if test="projectDes != null  and projectDes != '' "> and project_des = #{projectDes}</if>
-             <if test="projectAim != null  and projectAim != '' "> and project_aim = #{projectAim}</if>
-             <if test="hostUnit != null  and hostUnit != '' "> and host_unit = #{hostUnit}</if>
-             <if test="coUnit != null  and coUnit != '' "> and co_unit = #{coUnit}</if>
-             <if test="undertakeUnit != null  and undertakeUnit != '' "> and undertake_unit = #{undertakeUnit}</if>
+             <if test="members != null  and members != '' "> and members like concat('%',#{members},'%')</if>
+             <!--<if test="projectDes != null  and projectDes != '' "> and project_des = #{projectDes}</if>-->
+             <!--<if test="projectAim != null  and projectAim != '' "> and project_aim = #{projectAim}</if>-->
+             <!--<if test="hostUnit != null  and hostUnit != '' "> and host_unit = #{hostUnit}</if>-->
+             <!--<if test="coUnit != null  and coUnit != '' "> and co_unit = #{coUnit}</if>-->
+             <!--<if test="undertakeUnit != null  and undertakeUnit != '' "> and undertake_unit = #{undertakeUnit}</if>-->
              <if test="isPublish != null "> and is_publish = #{isPublish}</if>
              <!-- <if test="updateTime != null "> and update_time = #{updateTime}</if>-->
          </where>

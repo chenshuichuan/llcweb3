@@ -93,7 +93,7 @@ public class Patent extends BaseEntity {
      * 专利状态
      */
     @Column(name = "state" )
-    private Integer state;
+    private String state;
     /**
      * 组别
      */
@@ -226,11 +226,11 @@ public class Patent extends BaseEntity {
         return agency;
     }
 
-    public void setState(Integer state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public Integer getState() {
+    public String getState() {
         return state;
     }
 

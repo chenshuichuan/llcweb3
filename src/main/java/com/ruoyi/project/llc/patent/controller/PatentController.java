@@ -1,6 +1,10 @@
 package com.ruoyi.project.llc.patent.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.project.llc.document.service.IDocumentService;
+import com.ruoyi.project.system.files.service.IFilesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,107 +25,107 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * 专利成果 信息操作处理
- * 
+ *
  * @author ricardo
  * @date 2019-03-09
  */
 @Controller
 @RequestMapping("/admin/llc/patent")
-public class PatentController extends BaseController
-{
+public class PatentController extends BaseController {
     private String prefix = "llc/patent";
-	
-	@Autowired
-	private IPatentService patentService;
-	
-	@RequiresPermissions("llc:patent:view")
-	@GetMapping()
-	public String patent()
-	{
-	    return prefix + "/patent";
-	}
-	
-	/**
-	 * 查询专利成果列表
-	 */
-	@RequiresPermissions("llc:patent:list")
-	@PostMapping("/list")
-	@ResponseBody
-	public TableDataInfo list(Patent patent)
-	{
-		startPage();
+
+    @Autowired
+    private IPatentService patentService;
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private IFilesService filesService;
+
+    @RequiresPermissions("llc:patent:view")
+    @GetMapping()
+    public String patent() {
+        return prefix + "/patent";
+    }
+
+    /**
+     * 查询专利成果列表
+     */
+    @RequiresPermissions("llc:patent:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(Patent patent) {
+        startPage();
         List<Patent> list = patentService.selectPatentList(patent);
-		return getDataTable(list);
-	}
-	
-	
-	/**
-	 * 导出专利成果列表
-	 */
-	@RequiresPermissions("llc:patent:export")
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 导出专利成果列表
+     */
+    @RequiresPermissions("llc:patent:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Patent patent)
-    {
-    	List<Patent> list = patentService.selectPatentList(patent);
+    public AjaxResult export(Patent patent) {
+        List<Patent> list = patentService.selectPatentList(patent);
         ExcelUtil<Patent> util = new ExcelUtil<Patent>(Patent.class);
         return util.exportExcel(list, "patent");
     }
-	
-	/**
-	 * 新增专利成果
-	 */
-	@GetMapping("/add")
-	public String add()
-	{
-	    return prefix + "/add";
-	}
-	
-	/**
-	 * 新增保存专利成果
-	 */
-	@RequiresPermissions("llc:patent:add")
-	@Log(title = "专利成果", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(Patent patent)
-	{		
-		return toAjax(patentService.insertPatent(patent));
-	}
 
-	/**
-	 * 修改专利成果
-	 */
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
-	{
-		Patent patent = patentService.selectPatentById(id);
-		mmap.put("patent", patent);
-	    return prefix + "/edit";
-	}
-	
-	/**
-	 * 修改保存专利成果
-	 */
-	@RequiresPermissions("llc:patent:edit")
-	@Log(title = "专利成果", businessType = BusinessType.UPDATE)
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(Patent patent)
-	{		
-		return toAjax(patentService.updatePatent(patent));
-	}
-	
-	/**
-	 * 删除专利成果
-	 */
-	@RequiresPermissions("llc:patent:remove")
-	@Log(title = "专利成果", businessType = BusinessType.DELETE)
-	@PostMapping( "/remove")
-	@ResponseBody
-	public AjaxResult remove(String ids)
-	{		
-		return toAjax(patentService.deletePatentByIds(ids));
-	}
-	
+    /**
+     * 新增专利成果
+     */
+    @GetMapping("/add")
+    public String add(ModelMap mmap) {
+        mmap.put("documentList", documentService.getDocumentByAuthor(ShiroUtils.getLoginName()));
+        mmap.put("FilesList", filesService.findByCreateByName(ShiroUtils.getLoginName()));
+        return prefix + "/add";
+    }
+
+    /**
+     * 新增保存专利成果
+     */
+    @RequiresPermissions("llc:patent:add")
+    @Log(title = "专利成果", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Patent patent) {
+        return toAjax(patentService.insertPatent(patent));
+    }
+
+    /**
+     * 修改专利成果
+     */
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
+        Patent patent = patentService.selectPatentById(id);
+        mmap.put("patent", patent);
+        mmap.put("documentList",documentService.getDocumentByAuthor(ShiroUtils.getLoginName()));
+        mmap.put("FilesList",filesService.findByCreateByName(ShiroUtils.getLoginName()));
+
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存专利成果
+     */
+    @RequiresPermissions("llc:patent:edit")
+    @Log(title = "专利成果", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(Patent patent) {
+        return toAjax(patentService.updatePatent(patent));
+    }
+
+    /**
+     * 删除专利成果
+     */
+    @RequiresPermissions("llc:patent:remove")
+    @Log(title = "专利成果", businessType = BusinessType.DELETE)
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids) {
+        return toAjax(patentService.deletePatentByIds(ids));
+    }
+
 }

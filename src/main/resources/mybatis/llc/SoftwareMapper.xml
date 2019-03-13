@@ -29,12 +29,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectSoftwareVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="title != null  and title != '' "> and title like concat('%',#{title},'%')</if>
              <!-- <if test="appliDate != null "> and appli_date = #{appliDate}</if>-->
-             <if test="introduction != null  and introduction != '' "> and introduction = #{introduction}</if>
-             <if test="authorList != null  and authorList != '' "> and author_list = #{authorList}</if>
-             <if test="sourceFile != null "> and source_file = #{sourceFile}</if>
-             <if test="belongProject != null  and belongProject != '' "> and belong_project = #{belongProject}</if>
+             <!--<if test="introduction != null  and introduction != '' "> and introduction = #{introduction}</if>-->
+             <if test="authorList != null  and authorList != '' "> and author_list like concat('%',#{authorList},'%')</if>
+             <!--<if test="sourceFile != null "> and source_file = #{sourceFile}</if>-->
+             <!--<if test="belongProject != null  and belongProject != '' "> and belong_project = #{belongProject}</if>-->
              <if test="publicNum != null  and publicNum != '' "> and public_num = #{publicNum}</if>
              <!-- <if test="publicDate != null "> and public_date = #{publicDate}</if>-->
              <if test="status != null  and status != '' "> and status = #{status}</if>

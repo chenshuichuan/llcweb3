@@ -1,6 +1,10 @@
 package com.ruoyi.project.llc.project.controller;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.project.llc.document.service.IDocumentService;
+import com.ruoyi.project.system.files.service.IFilesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,107 +25,106 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 
 /**
  * 项目管理 信息操作处理
- * 
+ *
  * @author ricardo
  * @date 2019-03-09
  */
 @Controller
 @RequestMapping("/admin/llc/project")
-public class ProjectController extends BaseController
-{
+public class ProjectController extends BaseController {
     private String prefix = "llc/project";
-	
-	@Autowired
-	private IProjectService projectService;
-	
-	@RequiresPermissions("llc:project:view")
-	@GetMapping()
-	public String project()
-	{
-	    return prefix + "/project";
-	}
-	
-	/**
-	 * 查询项目管理列表
-	 */
-	@RequiresPermissions("llc:project:list")
-	@PostMapping("/list")
-	@ResponseBody
-	public TableDataInfo list(Project project)
-	{
-		startPage();
+
+    @Autowired
+    private IProjectService projectService;
+    @Autowired
+    private IDocumentService documentService;
+    @Autowired
+    private IFilesService filesService;
+
+    @RequiresPermissions("llc:project:view")
+    @GetMapping()
+    public String project() {
+        return prefix + "/project";
+    }
+
+    /**
+     * 查询项目管理列表
+     */
+    @RequiresPermissions("llc:project:list")
+    @PostMapping("/list")
+    @ResponseBody
+    public TableDataInfo list(Project project) {
+        startPage();
         List<Project> list = projectService.selectProjectList(project);
-		return getDataTable(list);
-	}
-	
-	
-	/**
-	 * 导出项目管理列表
-	 */
-	@RequiresPermissions("llc:project:export")
+        return getDataTable(list);
+    }
+
+
+    /**
+     * 导出项目管理列表
+     */
+    @RequiresPermissions("llc:project:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Project project)
-    {
-    	List<Project> list = projectService.selectProjectList(project);
+    public AjaxResult export(Project project) {
+        List<Project> list = projectService.selectProjectList(project);
         ExcelUtil<Project> util = new ExcelUtil<Project>(Project.class);
         return util.exportExcel(list, "project");
     }
-	
-	/**
-	 * 新增项目管理
-	 */
-	@GetMapping("/add")
-	public String add()
-	{
-	    return prefix + "/add";
-	}
-	
-	/**
-	 * 新增保存项目管理
-	 */
-	@RequiresPermissions("llc:project:add")
-	@Log(title = "项目管理", businessType = BusinessType.INSERT)
-	@PostMapping("/add")
-	@ResponseBody
-	public AjaxResult addSave(Project project)
-	{		
-		return toAjax(projectService.insertProject(project));
-	}
 
-	/**
-	 * 修改项目管理
-	 */
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable("id") Integer id, ModelMap mmap)
-	{
-		Project project = projectService.selectProjectById(id);
-		mmap.put("project", project);
-	    return prefix + "/edit";
-	}
-	
-	/**
-	 * 修改保存项目管理
-	 */
-	@RequiresPermissions("llc:project:edit")
-	@Log(title = "项目管理", businessType = BusinessType.UPDATE)
-	@PostMapping("/edit")
-	@ResponseBody
-	public AjaxResult editSave(Project project)
-	{		
-		return toAjax(projectService.updateProject(project));
-	}
-	
-	/**
-	 * 删除项目管理
-	 */
-	@RequiresPermissions("llc:project:remove")
-	@Log(title = "项目管理", businessType = BusinessType.DELETE)
-	@PostMapping( "/remove")
-	@ResponseBody
-	public AjaxResult remove(String ids)
-	{		
-		return toAjax(projectService.deleteProjectByIds(ids));
-	}
-	
+    /**
+     * 新增项目管理
+     */
+    @GetMapping("/add")
+    public String add(ModelMap mmap) {
+        mmap.put("documentList",documentService.getDocumentByAuthor(ShiroUtils.getLoginName()));
+        mmap.put("FilesList",filesService.findByCreateByName(ShiroUtils.getLoginName()));
+        return prefix + "/add";
+    }
+
+    /**
+     * 新增保存项目管理
+     */
+    @RequiresPermissions("llc:project:add")
+    @Log(title = "项目管理", businessType = BusinessType.INSERT)
+    @PostMapping("/add")
+    @ResponseBody
+    public AjaxResult addSave(Project project) {
+        return toAjax(projectService.insertProject(project));
+    }
+
+    /**
+     * 修改项目管理
+     */
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Integer id, ModelMap mmap) {
+        Project project = projectService.selectProjectById(id);
+        mmap.put("project", project);
+        mmap.put("documentList",documentService.getDocumentByAuthor(ShiroUtils.getLoginName()));
+        mmap.put("FilesList",filesService.findByCreateByName(ShiroUtils.getLoginName()));
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改保存项目管理
+     */
+    @RequiresPermissions("llc:project:edit")
+    @Log(title = "项目管理", businessType = BusinessType.UPDATE)
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(Project project) {
+        return toAjax(projectService.updateProject(project));
+    }
+
+    /**
+     * 删除项目管理
+     */
+    @RequiresPermissions("llc:project:remove")
+    @Log(title = "项目管理", businessType = BusinessType.DELETE)
+    @PostMapping("/remove")
+    @ResponseBody
+    public AjaxResult remove(String ids) {
+        return toAjax(projectService.deleteProjectByIds(ids));
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.ruoyi.project.system.user.service;
 
-import com.ruoyi.project.llc.document1.service.IDocument1Service;
 import com.ruoyi.project.llc.people.domain.People;
 import com.ruoyi.project.llc.people.service.PeopleRepository;
 import com.ruoyi.project.system.files.domain.Files;

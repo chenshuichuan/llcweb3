@@ -1,9 +1,11 @@
 package com.ruoyi.project.llc.document.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.ruoyi.common.utils.security.ShiroUtils;
+import com.ruoyi.project.llc.document.domain.DocumentInfor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.llc.document.mapper.DocumentMapper;
@@ -23,6 +25,8 @@ public class DocumentServiceImpl implements IDocumentService
 	@Autowired
 	private DocumentMapper documentMapper;
 
+	@Autowired
+	private DocumentRepository documentRepository;
 	/**
      * 查询文档管理信息
      * 
@@ -94,5 +98,27 @@ public class DocumentServiceImpl implements IDocumentService
 	{
 		return documentMapper.deleteDocumentByIds(Convert.toStrArray(ids));
 	}
-	
+
+	@Override
+	public List<DocumentInfor> documentToDocuemntInfor(List<Document> documentList) {
+		List<DocumentInfor> documentInforList = new ArrayList<>();
+		for (Document document : documentList){
+			DocumentInfor documentInfor = new DocumentInfor(document);
+			documentInforList.add(documentInfor);
+		}
+		return documentInforList;
+	}
+
+	@Override
+	public List<DocumentInfor> getDocumentByAuthor(String author) {
+		List<Document> documentList = null ;
+		if(!author.equals("admin")){
+			documentList = documentRepository.findByAuthor(author);
+		}
+		else {
+			documentList = documentRepository.findAll();
+		}
+		return documentToDocuemntInfor(documentList);
+	}
+
 }

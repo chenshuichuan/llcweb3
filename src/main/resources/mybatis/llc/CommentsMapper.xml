@@ -21,9 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCommentsList" parameterType="Comments" resultMap="CommentsResult">
         <include refid="selectCommentsVo"/>
         <where>  
-            <if test="id != null "> and id = #{id}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
-             <if test="content != null  and content != '' "> and content = #{content}</if>
+             <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name like concat('%',#{name},'%')</if>
+             <if test="content != null  and content != '' "> and like concat('%',#{content},'%')</if>
              <if test="contact != null  and contact != '' "> and contact = #{contact}</if>
              <!--<if test="createTime != null "> and create_time = #{createTime}</if>-->
              <if test="isView != null "> and is_view = #{isView}</if>

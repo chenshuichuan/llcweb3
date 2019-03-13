@@ -33,21 +33,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectPatentVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="title != null  and title != '' "> and title like concat('%',#{title},'%')</if>
              <!-- <if test="appliDate != null "> and appli_date = #{appliDate}</if>-->
-             <if test="introduction != null "> and introduction = #{introduction}</if>
-             <if test="authorList != null  and authorList != '' "> and author_list = #{authorList}</if>
-             <if test="originalLink != null  and originalLink != '' "> and original_link = #{originalLink}</if>
-             <if test="sourceFile != null "> and source_file = #{sourceFile}</if>
-             <if test="appliNum != null  and appliNum != '' "> and appli_num = #{appliNum}</if>
-             <if test="appliPeople != null  and appliPeople != '' "> and appli_people = #{appliPeople}</if>
-             <if test="applicationDate != null "> and application_date = #{applicationDate}</if>
-             <if test="publicNum != null  and publicNum != '' "> and public_num = #{publicNum}</if>
+             <!--<if test="introduction != null "> and introduction = #{introduction}</if>-->
+             <if test="authorList != null  and authorList != '' "> and author_list like concat('%',#{authorList},'%')</if>
+             <!--<if test="originalLink != null  and originalLink != '' "> and original_link = #{originalLink}</if>-->
+             <!--<if test="sourceFile != null "> and source_file = #{sourceFile}</if>-->
+             <if test="appliNum != null  and appliNum != '' "> and appli_num like concat('%',#{appliNum},'%')</if>
+             <if test="appliPeople != null  and appliPeople != '' "> and appli_people = like concat('%',#{appliPeople},'%')</if>
+             <!--<if test="applicationDate != null "> and application_date = #{applicationDate}</if>-->
+             <if test="publicNum != null  and publicNum != '' "> and public_num like concat('%',#{publicNum},'%')</if>
              <!-- <if test="publicDate != null "> and public_date = #{publicDate}</if>-->
              <!-- <if test="authorizationDate != null "> and authorization_date = #{authorizationDate}</if>-->
-             <if test="agency != null  and agency != '' "> and agency = #{agency}</if>
-             <if test="state != null "> and state = #{state}</if>
-             <if test="model != null  and model != '' "> and model = #{model}</if>
+             <if test="agency != null  and agency != '' "> and agency like concat('%',#{agency},'%')</if>
+             <if test="state != null "> and state like concat('%',#{state},'%')</if>
+             <if test="model != null  and model != '' "> and model like concat('%',#{model},'%')</if>
              <if test="isPublish != null "> and is_publish = #{isPublish}</if>
              <!-- <if test="updateTime != null "> and update_time = #{updateTime}</if>-->
          </where>

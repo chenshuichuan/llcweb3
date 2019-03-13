@@ -29,17 +29,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectPeopleVo"/>
         <where>  
             <if test="id != null "> and id = #{id}</if>
-             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="name != null  and name != '' "> and name like concat('%',#{name},'%')</if>
              <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
              <if test="email != null  and email != '' "> and email = #{email}</if>
              <if test="portrait != null "> and portrait = #{portrait}</if>
-             <if test="position != null  and position != '' "> and position = #{position}</if>
-             <if test="introduction != null "> and introduction = #{introduction}</if>
+             <if test="position != null  and position != '' "> and position like concat('%',#{position},'%')</if>
+             <!--<if test="introduction != null "> and introduction = #{introduction}</if>-->
              <if test="grade != null "> and grade = #{grade}</if>
-             <if test="researchField != null  and researchField != '' "> and research_field = #{researchField}</if>
-             <if test="academicTitle != null  and academicTitle != '' "> and academic_title = #{academicTitle}</if>
-             <if test="adminPosition != null  and adminPosition != '' "> and admin_position = #{adminPosition}</if>
-             <if test="highestDegree != null  and highestDegree != '' "> and highest_degree = #{highestDegree}</if>
+             <if test="researchField != null  and researchField != '' "> and research_field like concat('%',#{researchField},'%')</if>
+             <!--<if test="academicTitle != null  and academicTitle != '' "> and academic_title = #{academicTitle}</if>-->
+             <!--<if test="adminPosition != null  and adminPosition != '' "> and admin_position = #{adminPosition}</if>-->
+             <if test="highestDegree != null  and highestDegree != '' "> and highest_degree like concat('%',#{highestDegree},'%')</if>
              <if test="sex != null  and sex != '' "> and sex = #{sex}</if>
              <!-- <if test="updateTime != null "> and update_time = #{updateTime}</if>-->
          </where>
