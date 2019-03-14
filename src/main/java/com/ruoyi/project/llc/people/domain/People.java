@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.people.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -25,71 +26,85 @@ public class People extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 姓名
      */
     @Column(name = "name" )
+    @Excel(name = "姓名")
     private String name;
     /**
      * 手机号
      */
     @Column(name = "phone" )
+    @Excel(name = "手机号码")
     private String phone;
     /**
      * y邮箱
      */
     @Column(name = "email" )
+    @Excel(name = "邮箱")
     private String email;
     /**
      * 人物头像图片路径，关联image表
      */
     @Column(name = "portrait" )
+    @Excel(name = "人物头像")
     private Integer portrait;
     /**
      * 职位，教授、副教授、讲师、博士后、博士、硕士，本科生
      */
     @Column(name = "position" )
+    @Excel(name = "职位")
     private String position;
     /**
      * 关联document表
      */
     @Column(name = "introduction" )
+    @Excel(name = "关联document")
     private Integer introduction;
     /**
      * 本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
      */
     @Column(name = "grade" )
+    @Excel(name = "年级")
     private Integer grade;
     /**
      * 研究方向
      */
     @Column(name = "research_field" )
+    @Excel(name = "研究方向")
     private String researchField;
     /**
      * 学术头衔
      */
     @Column(name = "academic_title" )
+    @Excel(name = "学术头衔")
     private String academicTitle;
     /**
      * 行政职务
      */
     @Column(name = "admin_position" )
+    @Excel(name = "行政职务")
     private String adminPosition;
     /**
      * 最高学历
      */
     @Column(name = "highest_degree" )
+    @Excel(name = "最高学历")
     private String highestDegree;
     /**
      * 性别
      */
     @Column(name = "sex" )
+    @Excel(name = "性别")
     private String sex;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
+    @Excel(name = "更新时间")
     private Date updateTime;
 
     public People() {

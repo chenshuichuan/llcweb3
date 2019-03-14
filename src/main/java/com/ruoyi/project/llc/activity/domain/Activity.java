@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.activity.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -23,51 +24,61 @@ public class Activity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 活动名称
      */
     @Column(name = "name" )
+    @Excel(name = "活动名称")
     private String name;
     /**
      * 活动发布者
      */
     @Column(name = "author" )
+    @Excel(name = "活动名称")
     private String author;
     /**
      * 活动参与者
      */
     @Column(name = "people_list" )
+    @Excel(name = "活动参与者")
     private String peopleList;
     /**
      * 开始时间
      */
     @Column(name = "start_date" )
+    @Excel(name = "开始时间")
     private Date startDate;
     /**
      * 结束时间
      */
     @Column(name = "end_date" )
+    @Excel(name = "结束时间")
     private Date endDate;
     /**
      * 活动简介
      */
     @Column(name = "introduction" )
+    @Excel(name = "活动简介")
     private Integer introduction;
     /**
      * 组别
      */
     @Column(name = "model" )
+    @Excel(name = "组别")
     private String model;
     /**
      * 活动类型,通知、会议、招聘、活动等
      */
     @Column(name = "activity_type" )
+    @Excel(name = "活动类型")
     private String activityType;
     /**
      * 是否发布出去
      */
     @Column(name = "is_publish" )
+    @Excel(name = "是否发布")
     private Integer isPublish;
 
     public Activity() {

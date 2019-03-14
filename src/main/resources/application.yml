@@ -14,7 +14,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务端口
-  port: 8091
+  port: 8090
   servlet:
     # 项目contextPath
     context-path: /
@@ -100,7 +100,7 @@ shiro:
     # 设置Cookie的域名 默认空，即当前访问的域名
     domain:
     # 设置cookie的有效访问路径
-    path: /
+    path: /admin/
     # 设置HttpOnly属性
     httpOnly: true
     # 设置Cookie的过期时间，天为单位

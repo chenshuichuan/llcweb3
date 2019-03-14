@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.comments.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -23,36 +24,43 @@ public class Comments extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 姓名
      */
     @Column(name = "name" )
+    @Excel(name = "姓名")
     private String name;
     /**
      * 留言内容
      */
     @Column(name = "content" )
+    @Excel(name = "留言内容")
     private String content;
     /**
      * 联系方式
      */
     @Column(name = "contact" )
+    @Excel(name = "联系方式")
     private String contact;
     /**
      * 留言时间
      */
     @Column(name = "create_time" )
+    @Excel(name = "留言时间")
     private Date createTime;
     /**
      * 管理员是否已经查看过
      */
     @Column(name = "is_view" )
+    @Excel(name = "否已经查看过")
     private Integer isView;
     /**
      * ip地址
      */
     @Column(name = "ip_address" )
+    @Excel(name = "ip地址")
     private String ipAddress;
 
     public Comments() {this.createTime = new Date();

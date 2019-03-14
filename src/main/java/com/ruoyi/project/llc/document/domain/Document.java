@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.document.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -25,16 +26,19 @@ public class Document extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 标题
      */
     @Column(name = "title" )
+    @Excel(name = "标题")
     private String title;
     /**
      * 作者名称
      */
     @Column(name = "author" )
+    @Excel(name = "作者名称")
     private String author;
     /**
      * 内容
@@ -45,21 +49,25 @@ public class Document extends BaseEntity {
      * 文档注释
      */
     @Column(name = "infor" )
+    @Excel(name = "文档注释")
     private String infor;
     /**
      * 组别
      */
     @Column(name = "model" )
+    @Excel(name = "组别")
     private String model;
     /**
      * 创建时间
      */
     @Column(name = "create_time" )
+    @Excel(name = "创建时间")
     private Date createTime;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
+    @Excel(name = "更新时间")
     private Date updateTime;
 
     public Document() {

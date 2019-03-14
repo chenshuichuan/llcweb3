@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.paper.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -23,71 +24,85 @@ public class Paper extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 题目
      */
     @Column(name = "title" )
+    @Excel(name = "题目")
     private String title;
     /**
      * 发表日期
      */
     @Column(name = "public_date" )
+    @Excel(name = "发表日期")
     private Date publicDate;
     /**
      * 论文介绍
      */
     @Column(name = "introduction" )
+    @Excel(name = "论文介绍")
     private Integer introduction;
     /**
      * 作者列表
      */
     @Column(name = "author_list" )
+    @Excel(name = "作者列表")
     private String authorList;
     /**
      * 原文链接
      */
     @Column(name = "original_link" )
+    @Excel(name = "原文链接")
     private String originalLink;
     /**
      * 论文文件
      */
     @Column(name = "source_file" )
+    @Excel(name = "论文文件")
     private Integer sourceFile;
     /**
      * 所属项目id
      */
     @Column(name = "belong_project" )
+    @Excel(name = "所属项目")
     private String belongProject;
     /**
      * 发表期刊
      */
     @Column(name = "periodical" )
+    @Excel(name = "发表期刊")
     private String periodical;
     /**
      * 期刊类别
      */
     @Column(name = "periodical_type" )
+    @Excel(name = "期刊类别")
     private String periodicalType;
     /**
      * 当前状态
      */
     @Column(name = "state" )
+    @Excel(name = "当前状态")
     private String state;
     /**
      * 项目组
      */
     @Column(name = "model" )
+    @Excel(name = "项目组")
     private String model;
     /**
      * 是否发布
      */
     @Column(name = "is_publish" )
+    @Excel(name = "是否发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
+    @Excel(name = "更新时间")
     private Date updateTime;
 
     public Paper() {

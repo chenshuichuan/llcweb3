@@ -28,8 +28,10 @@ public class IndexController extends BaseController
     @Autowired
     private RuoYiConfig ruoYiConfig;
 
-    // 系统首页
-    @GetMapping("/index")
+    /**
+     * 系统首页
+     */
+    @GetMapping({"/","/index","/index.html","/index.htm"})
     public String index(ModelMap mmap)
     {
         // 取身份信息

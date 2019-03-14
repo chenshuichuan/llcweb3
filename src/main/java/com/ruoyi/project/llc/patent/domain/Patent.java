@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.patent.domain;
 
+import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.framework.web.domain.BaseEntity;
@@ -23,91 +24,109 @@ public class Patent extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id" )
+    @Excel(name = "id")
     private Integer id;
     /**
      * 专利标题
      */
     @Column(name = "title" )
+    @Excel(name = "专利标题")
     private String title;
     /**
      * 申请日
      */
     @Column(name = "appli_date" )
+    @Excel(name = "申请日")
     private Date appliDate;
     /**
      * 专利介绍
      */
     @Column(name = "introduction" )
+    @Excel(name = "专利介绍")
     private Integer introduction;
     /**
      * 作者姓名列表
      */
     @Column(name = "author_list" )
+    @Excel(name = "作者")
     private String authorList;
     /**
      * 原文链接
      */
     @Column(name = "original_link" )
+    @Excel(name = "原文链接")
     private String originalLink;
     /**
      * 关联的文件id
      */
     @Column(name = "source_file" )
+    @Excel(name = "关联的文件")
     private Integer sourceFile;
     /**
      * 专利申请号
      */
     @Column(name = "appli_num" )
+    @Excel(name = "是否发布")
     private String appliNum;
     /**
      * 申请人（一般为广东工业大学）
      */
     @Column(name = "appli_people" )
+    @Excel(name = "申请人")
     private String appliPeople;
     /**
      * 申请日期
      */
     @Column(name = "application_date" )
+    @Excel(name = "申请日期")
     private Date applicationDate;
     /**
      * 专利公开号
      */
     @Column(name = "public_num" )
+    @Excel(name = "专利公开号")
     private String publicNum;
     /**
      * 公开日
      */
     @Column(name = "public_date" )
+    @Excel(name = "公开日")
     private Date publicDate;
     /**
      * 授权日期
      */
     @Column(name = "authorization_date" )
+    @Excel(name = "授权日期")
     private Date authorizationDate;
     /**
      * 代理机构
      */
     @Column(name = "agency" )
+    @Excel(name = "代理机构")
     private String agency;
     /**
      * 专利状态
      */
     @Column(name = "state" )
+    @Excel(name = "专利状态")
     private String state;
     /**
      * 组别
      */
     @Column(name = "model" )
+    @Excel(name = "组别")
     private String model;
     /**
      * 是否发布
      */
     @Column(name = "is_publish" )
+    @Excel(name = "是否发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
+    @Excel(name = "更新时间")
     private Date updateTime;
 
     public Patent() {
