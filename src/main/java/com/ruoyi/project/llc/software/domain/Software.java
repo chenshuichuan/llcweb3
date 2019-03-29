@@ -38,7 +38,7 @@ public class Software extends BaseEntity {
      * 申请日
      */
     @Column(name = "appli_date" )
-    @Excel(name = "申请日")
+    @Excel(name = "申请日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date appliDate;
     /**
      * 摘要
@@ -74,7 +74,7 @@ public class Software extends BaseEntity {
      * 公开日
      */
     @Column(name = "public_date" )
-    @Excel(name = "公开日")
+    @Excel(name = "公开日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date publicDate;
     /**
      * 状态
@@ -98,13 +98,13 @@ public class Software extends BaseEntity {
      * 是否发布
      */
     @Column(name = "is_publish" )
-    @Excel(name = "是否发布")
+    @Excel(name = "是否发布", readConverterExp = "0=不发布,1=发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updateTime;
 
     public Software() {

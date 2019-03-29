@@ -36,7 +36,7 @@ public class Paper extends BaseEntity {
      * 发表日期
      */
     @Column(name = "public_date" )
-    @Excel(name = "发表日期")
+    @Excel(name = "发表日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date publicDate;
     /**
      * 论文介绍
@@ -96,13 +96,13 @@ public class Paper extends BaseEntity {
      * 是否发布
      */
     @Column(name = "is_publish" )
-    @Excel(name = "是否发布")
+    @Excel(name = "是否发布", readConverterExp = "0=不发布,1=发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public Paper() {

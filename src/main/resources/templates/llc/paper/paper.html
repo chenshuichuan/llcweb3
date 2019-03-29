@@ -71,9 +71,9 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('llc:paper:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:paper:remove')}]];
-        ctx = ctx + webPrefix+"/";
+
         var datas = [[${@dict.getType('user_yes_no')}]];
-        var prefix = ctx + "llc/paper";
+        var prefix = ctx + webPrefix+ "/llc/paper";
 
         $(function() {
             var options = {
@@ -106,7 +106,8 @@
 				{
 					field : 'introduction', 
 					title : '论文介绍',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'authorList', 
@@ -116,17 +117,20 @@
 				{
 					field : 'originalLink', 
 					title : '原文链接',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'sourceFile', 
 					title : '论文文件',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'belongProject', 
 					title : '所属项目',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'periodical', 

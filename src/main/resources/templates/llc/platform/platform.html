@@ -39,9 +39,9 @@
 				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="llc:platform:remove">
 					<i class="fa fa-remove"></i> 删除
 				</a>
-				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="llc:platform:export">
-						<i class="fa fa-download"></i> 导出
-				 </a>
+				<!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="llc:platform:export">-->
+						<!--<i class="fa fa-download"></i> 导出-->
+				 <!--</a>-->
 			</div>
 			<div class="col-sm-12 select-table table-striped">
 				<table id="bootstrap-table" data-mobile-responsive="true"></table>
@@ -53,8 +53,8 @@
         var editFlag = [[${@permission.hasPermi('llc:platform:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:platform:remove')}]];
         var datas = [[${@dict.getType('user_yes_no')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/platform";
+
+        var prefix = ctx + webPrefix+"/llc/platform";
 
         $(function() {
             var options = {
@@ -106,7 +106,7 @@
 				},
 				{
 					field : 'pdfFile', 
-					title : 'p平台介绍PDF文件',
+					title : '平台介绍PDF文件',
 					sortable: true
 				},
 				{

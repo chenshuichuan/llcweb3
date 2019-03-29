@@ -48,13 +48,13 @@ public class Activity extends BaseEntity {
      * 开始时间
      */
     @Column(name = "start_date" )
-    @Excel(name = "开始时间")
+    @Excel(name = "开始时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date startDate;
     /**
      * 结束时间
      */
     @Column(name = "end_date" )
-    @Excel(name = "结束时间")
+    @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date endDate;
     /**
      * 活动简介
@@ -78,7 +78,7 @@ public class Activity extends BaseEntity {
      * 是否发布出去
      */
     @Column(name = "is_publish" )
-    @Excel(name = "是否发布")
+    @Excel(name = "是否发布", readConverterExp = "0=不发布,1=发布")
     private Integer isPublish;
 
     public Activity() {

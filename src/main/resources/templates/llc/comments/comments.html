@@ -60,8 +60,8 @@
         var editFlag = [[${@permission.hasPermi('llc:comments:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:comments:remove')}]];
         var datas = [[${@dict.getType('user_yes_no')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/comments";
+
+        var prefix = ctx +webPrefix+"/llc/comments";
 
         $(function() {
             var options = {

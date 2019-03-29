@@ -75,8 +75,8 @@
     var editFlag = [[${@permission.hasPermi('llc:document:edit')}]];
     var removeFlag = [[${@permission.hasPermi('llc:document:remove')}]];
     var models = [[${@dict.getType('user_yes_no')}]];
-    ctx = ctx + webPrefix + "/";
-    var prefix = ctx + "llc/document";
+
+    var prefix = ctx +  webPrefix + "/llc/document";
 
     $(function () {
         var options = {

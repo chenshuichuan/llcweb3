@@ -77,8 +77,8 @@
         var editFlag = [[${@permission.hasPermi('llc:patent:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:patent:remove')}]];
         var datas = [[${@dict.getType('user_yes_no')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/patent";
+
+        var prefix = ctx + webPrefix+"/llc/patent";
 
         $(function() {
             var options = {
@@ -126,7 +126,8 @@
 				{
 					field : 'sourceFile', 
 					title : '关联文件',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'appliNum', 
@@ -138,11 +139,12 @@
 					title : '申请人',
                     visible: false
 				},
-				{
-					field : 'applicationDate', 
-					title : '申请日期',
-					sortable: true
-				},
+//				{
+//					field : 'applicationDate',
+//					title : '申请日期',
+//					sortable: true,
+//                    visible: false
+//				},
 				{
 					field : 'publicNum', 
 					title : '公开号',
@@ -172,7 +174,8 @@
 				{
 					field : 'model', 
 					title : '组别',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'isPublish', 

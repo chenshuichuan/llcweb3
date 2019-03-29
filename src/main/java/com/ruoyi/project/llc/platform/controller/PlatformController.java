@@ -5,6 +5,7 @@ import java.util.List;
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.llc.document.service.IDocumentService;
 import com.ruoyi.project.system.files.service.IFilesService;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,7 @@ import org.springframework.web.servlet.view.RedirectView;
  * @author ricardo
  * @date 2019-03-09
  */
+@Api("平台管理")
 @Controller
 @RequestMapping("/admin/llc/platform")
 public class PlatformController extends BaseController {

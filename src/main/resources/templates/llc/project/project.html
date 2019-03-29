@@ -78,8 +78,8 @@
         var editFlag = [[${@permission.hasPermi('llc:project:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:project:remove')}]];
         var datas = [[${@dict.getType('user_yes_no')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/project";
+
+        var prefix = ctx + webPrefix+"/llc/project";
 
         $(function() {
             var options = {
@@ -112,7 +112,8 @@
 				{
 					field : 'introduction', 
 					title : '项目介绍',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'introductionFile', 
@@ -151,15 +152,18 @@
 				},
 				{
 					field : 'projectType', 
-					title : '项目类型'
+					title : '项目类型',
+                    visible: false
 				},
 				{
 					field : 'members', 
-					title : '项目人员'
+					title : '项目人员',
+                    visible: false
 				},
 				{
 					field : 'projectDes', 
-					title : '项目描述'
+					title : '项目描述',
+                    visible: false
 				},
 				{
 					field : 'projectAim', 

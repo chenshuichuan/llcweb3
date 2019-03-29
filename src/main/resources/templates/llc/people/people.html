@@ -30,7 +30,7 @@
 								最高学历：<input type="text" name="highestDegree"/>
 							</li>
 							<li>
-								性别：<input type="text" name="sex"/>
+								性别：
 								<select id="sex" name="sex"  th:with="type=${@dict.getType('sys_user_sex')}">
 									<option value="">所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -70,8 +70,7 @@
         var removeFlag = [[${@permission.hasPermi('llc:people:remove')}]];
         var datas = [[${@dict.getType('user_people_position')}]];
         var sexs = [[${@dict.getType('user_people_sex')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/people";
+        var prefix = ctx + webPrefix+"/llc/people";
 
         $(function() {
             var options = {

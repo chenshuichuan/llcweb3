@@ -36,7 +36,7 @@ public class Patent extends BaseEntity {
      * 申请日
      */
     @Column(name = "appli_date" )
-    @Excel(name = "申请日")
+    @Excel(name = "申请日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date appliDate;
     /**
      * 专利介绍
@@ -66,7 +66,7 @@ public class Patent extends BaseEntity {
      * 专利申请号
      */
     @Column(name = "appli_num" )
-    @Excel(name = "是否发布")
+    @Excel(name = "申请号")
     private String appliNum;
     /**
      * 申请人（一般为广东工业大学）
@@ -78,7 +78,7 @@ public class Patent extends BaseEntity {
      * 申请日期
      */
     @Column(name = "application_date" )
-    @Excel(name = "申请日期")
+    @Excel(name = "申请日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date applicationDate;
     /**
      * 专利公开号
@@ -90,13 +90,13 @@ public class Patent extends BaseEntity {
      * 公开日
      */
     @Column(name = "public_date" )
-    @Excel(name = "公开日")
+    @Excel(name = "公开日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date publicDate;
     /**
      * 授权日期
      */
     @Column(name = "authorization_date" )
-    @Excel(name = "授权日期")
+    @Excel(name = "授权日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date authorizationDate;
     /**
      * 代理机构
@@ -120,13 +120,13 @@ public class Patent extends BaseEntity {
      * 是否发布
      */
     @Column(name = "is_publish" )
-    @Excel(name = "是否发布")
+    @Excel(name = "是否发布", readConverterExp = "0=不发布,1=发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updateTime;
 
     public Patent() {

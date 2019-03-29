@@ -74,13 +74,13 @@ public class Project extends BaseEntity {
      * 开始时间
      */
     @Column(name = "start_date" )
-    @Excel(name = "开始时间")
+    @Excel(name = "开始时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date startDate;
     /**
      * 结束时间
      */
     @Column(name = "end_date" )
-    @Excel(name = "结束时间")
+    @Excel(name = "结束时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date endDate;
     /**
      * 项目负责人
@@ -122,7 +122,7 @@ public class Project extends BaseEntity {
      * 协办单位
      */
     @Column(name = "co_unit" )
-    @Excel(name = "是否发布")
+    @Excel(name = "协办单位")
     private String coUnit;
     /**
      * 承办单位
@@ -134,13 +134,13 @@ public class Project extends BaseEntity {
      * 是否发布
      */
     @Column(name = "is_publish" )
-    @Excel(name = "是否发布")
+    @Excel(name = "是否发布", readConverterExp = "0=不发布,1=发布")
     private Integer isPublish;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updateTime;
     /**
      * 所属类别：用于门户分类

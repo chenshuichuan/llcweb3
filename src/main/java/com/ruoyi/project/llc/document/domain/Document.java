@@ -61,13 +61,13 @@ public class Document extends BaseEntity {
      * 创建时间
      */
     @Column(name = "create_time" )
-    @Excel(name = "创建时间")
+    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public Document() {

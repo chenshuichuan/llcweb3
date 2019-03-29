@@ -62,7 +62,7 @@ public class People extends BaseEntity {
      * 关联document表
      */
     @Column(name = "introduction" )
-    @Excel(name = "关联document")
+    @Excel(name = "关联简介")
     private Integer introduction;
     /**
      * 本科生、硕士生、博士生是届数；讲师，教授，等是加入年份
@@ -104,7 +104,7 @@ public class People extends BaseEntity {
      * 更新时间
      */
     @Column(name = "update_time" )
-    @Excel(name = "更新时间")
+    @Excel(name = "更新时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
     public People() {

@@ -259,8 +259,8 @@ public class ShiroConfig
         filters.put("onlineSession", onlineSessionFilter());
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         filters.put("captchaValidate", captchaValidateFilter());
-        // 注销成功，则跳转到指定页面
-        filters.put("/admin/logout", logoutFilter());
+        // 注销成功，则跳转到指定页面 //试一下 注销成功返回login看看
+        filters.put("/admin/login", logoutFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证

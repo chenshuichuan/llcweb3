@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.project.llc.document.domain.DocumentInfor;
+import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
  * @author ricardo
  * @date 2019-03-09
  */
+@Api("文档管理")
 @Controller
 @RequestMapping("/admin/llc/document")
 public class DocumentController extends BaseController

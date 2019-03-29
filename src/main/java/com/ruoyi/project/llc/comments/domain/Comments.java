@@ -48,13 +48,13 @@ public class Comments extends BaseEntity {
      * 留言时间
      */
     @Column(name = "create_time" )
-    @Excel(name = "留言时间")
+    @Excel(name = "留言时间", width = 30, dateFormat = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**
      * 管理员是否已经查看过
      */
     @Column(name = "is_view" )
-    @Excel(name = "否已经查看过")
+    @Excel(name = "否已查看", readConverterExp = "0=已查看,1=未查看")
     private Integer isView;
     /**
      * ip地址

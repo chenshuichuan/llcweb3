@@ -59,8 +59,8 @@
         var editFlag = [[${@permission.hasPermi('llc:software:edit')}]];
         var removeFlag = [[${@permission.hasPermi('llc:software:remove')}]];
         var datas = [[${@dict.getType('user_yes_no')}]];
-        ctx = ctx + webPrefix+"/";
-        var prefix = ctx + "llc/software";
+
+        var prefix = ctx + webPrefix+"/llc/software";
 
         $(function() {
             var options = {
@@ -93,7 +93,8 @@
 				{
 					field : 'introduction', 
 					title : '摘要',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'authorList', 
@@ -103,12 +104,14 @@
 				{
 					field : 'sourceFile', 
 					title : '关联的文件id',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'belongProject', 
 					title : '所属项目',
-					sortable: true
+					sortable: true,
+                    visible: false
 				},
 				{
 					field : 'publicNum', 

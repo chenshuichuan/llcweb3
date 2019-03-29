@@ -5,6 +5,8 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * druid 监控
@@ -17,10 +19,16 @@ public class DruidController extends BaseController
 {
     private String prefix = "/monitor/druid";
 
+//    @RequiresPermissions("monitor:data:view")
+//    @GetMapping()
+//    public String index()
+//    {
+//        return redirect("http://gdauto.gdut.edu.cn"+prefix + "/index");
+//    }
+
     @RequiresPermissions("monitor:data:view")
     @GetMapping()
-    public String index()
-    {
-        return redirect(prefix + "/index");
+    public ModelAndView swagger() {
+        return new ModelAndView(new RedirectView(prefix + "/index"));
     }
 }
