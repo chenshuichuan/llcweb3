@@ -16,40 +16,248 @@
 </head>
 
 <body class="gray-bg">
-<div class="row  border-bottom white-bg dashboard-header">
-    <div class="col-sm-12">
-        <blockquote class="text-warning" style="font-size:14px">
+<!--<div class="row  border-bottom white-bg dashboard-header">-->
+    <!--<div class="col-sm-12">-->
+        <!--<blockquote class="text-warning" style="font-size:14px">-->
 
-        </blockquote>
-        <hr>
-    </div>
-    <div class="col-sm-3">
-
-    </div>
-    <div class="col-sm-5">
-
-    </div>
-    <div class="col-sm-4">
-
-    </div>
-
-</div>
+        <!--</blockquote>-->
+        <!--<hr>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="wrapper wrapper-content">
     <div class="row">
-        <div class="col-sm-4">
-
+        <div class="col-lg-3">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>联系信息</h5>
+                    <span class="label label-danger pull-right">上月变化</span>
+                    <h5>用户</h5>
                 </div>
                 <div class="ibox-content">
-
+                    <h1 class="no-margins">64</h1>
+                    <div class="stat-percent font-bold text-danger">+0 <i class="fa fa-level-down"></i></div>
+                    <small>用户总数</small>
                 </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-success pull-right">上月增加</span>
+                    <h5>论文</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">129</h1>
+                    <div class="stat-percent font-bold text-success">+5<i class="fa fa-level-up"></i></div>
+                    <small>论文总数</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-info pull-right">上月增加</span>
+                    <h5>专利</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">210</h1>
+                    <div class="stat-percent font-bold text-info">+8 <i class="fa fa-level-up"></i></div>
+                    <small>专利总数</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">上月增加</span>
+                    <h5>软著</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">16</h1>
+                    <div class="stat-percent font-bold text-navy">+1<i class="fa fa-level-up"></i></div>
+                    <small>软著总数</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>成果增加情况</h5>
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-xs btn-white active">论文</button>
+                            <button type="button" class="btn btn-xs btn-white">专利</button>
+                            <button type="button" class="btn btn-xs btn-white">软著</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul class="stat-list">
+                                <li>
+                                    <h2 class="no-margins">129</h2>
+                                    <small>论文总数</small>
+                                    <div class="stat-percent">11% <i class="fa fa-level-up text-navy"></i></div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 11%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins ">+5</h2>
+                                    <small>上月增加</small>
+                                    <div class="stat-percent">7% <i class="fa fa-level-down text-navy"></i>
+                                    </div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 7%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins ">+129</h2>
+                                    <small>去年增加</small>
+                                    <div class="stat-percent">100% <i class="fa fa-bolt text-navy"></i></div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 22%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
 <script th:src="@{/admin/js/jquery.min.js}"></script>
 <script th:src="@{/admin/js/bootstrap.min.js}"></script>
+<!-- Flot -->
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.tooltip.min.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.spline.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.resize.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.pie.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.symbol.js}"></script>
+<script th:src="@{/admin/js/plugins/flot/jquery.flot.time.js}"></script>
+
+<!-- Flot -->
+<script src="../static/admin/js/plugins/flot/jquery.flot.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.spline.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.resize.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.pie.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.symbol.js"></script>
+<script src="../static/admin/js/plugins/flot/jquery.flot.time.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        //论文数据
+        var data2 = [
+            [gd(2018, 7, 1), 12], [gd(2018, 8, 1), 21], [gd(2018, 9, 1), 28], [gd(2018, 10, 1), 34],
+            [gd(2018, 11, 1), 45], [gd(2018, 12, 1), 58], [gd(2019, 1, 1), 71], [gd(2019, 2, 1), 86],
+            [gd(2019, 3, 1), 104], [gd(2019, 4, 1), 124], [gd(2019, 5, 1), 129]
+        ];
+
+        //增加数据
+        var data3 = [
+            [gd(2018, 7, 1), 12], [gd(2018, 8, 1), 9], [gd(2018, 9, 1), 7], [gd(2018, 10, 1), 6],
+            [gd(2018, 11, 1), 11], [gd(2018, 12, 1), 13], [gd(2019, 1,1), 13], [gd(2019, 2, 1), 15],
+            [gd(2019, 3, 1),18], [gd(2019, 4, 1), 20], [gd(2019, 5, 1), 5]
+        ];
+        var dataset = [
+            {
+                label: "总数",
+                data: data2,
+                color: "#1ab394",
+                bars: {
+                    show: true,
+                    align: "center",
+                    barWidth: 24 * 60 * 60 * 600,
+                    lineWidth: 0
+                }
+
+            },{
+                label: "增长量",
+                data: data3,
+                yaxis: 2,
+                color: "#1C84C6",
+                lines: {
+                    lineWidth: 1,
+                    show: true,
+                    fill: true,
+                    fillColor: {
+                        colors: [{
+                            opacity: 0.2
+                        }, {
+                            opacity: 0.4
+                        }]
+                    }
+                },
+                splines: {
+                    show: false,
+                    tension: 0.6,
+                    lineWidth: 1,
+                    fill: 0.1
+                },
+            }
+        ];
+
+
+        var options = {
+            xaxis: {
+                mode: "time",
+                tickSize: [1, "month"],
+                tickLength: 0,
+                axisLabel: "Month",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Arial',
+                axisLabelPadding: 10,
+                color: "#d5d5d5"
+            },
+            yaxes: [{
+                position: "left",
+                clolor: "#d5d5d5",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: ' Arial',
+                axisLabelPadding: 67
+            }, {
+                position: "right",
+                clolor: "#d5d5d5",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: ' Arial',
+                axisLabelPadding: 67
+            }
+            ],
+            legend: {
+                noColumns: 1,
+                labelBoxBorderColor: "#000000",
+                position: "nw"
+            },
+            grid: {
+                hoverable: false,
+                borderWidth: 0
+            }
+        };
+
+        function gd(year, month, day) {
+            return new Date(year, month - 1, day).getTime();
+        }
+
+        var previousPoint = null, previousLabel = null;
+
+        $.plot($("#flot-dashboard-chart"), dataset, options);
+
+    });
+</script>
 </body>
 </html>

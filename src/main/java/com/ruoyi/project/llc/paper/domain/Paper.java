@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.paper.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -37,6 +38,7 @@ public class Paper extends BaseEntity {
      */
     @Column(name = "public_date" )
     @Excel(name = "发表日期", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date publicDate;
     /**
      * 论文介绍

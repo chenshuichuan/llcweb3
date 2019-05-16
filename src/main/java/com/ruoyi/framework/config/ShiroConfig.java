@@ -217,7 +217,8 @@ public class ShiroConfig
     public LogoutFilter logoutFilter()
     {
         LogoutFilter logoutFilter = new LogoutFilter();
-        logoutFilter.setLoginUrl(loginUrl);
+        //loginUrl 试一下咯
+        logoutFilter.setLoginUrl("http://gdauto.gdut.edu.cn/admin/login");
         return logoutFilter;
     }
 
@@ -260,7 +261,7 @@ public class ShiroConfig
         filters.put("syncOnlineSession", syncOnlineSessionFilter());
         filters.put("captchaValidate", captchaValidateFilter());
         // 注销成功，则跳转到指定页面 //试一下 注销成功返回login看看
-        filters.put("/admin/login", logoutFilter());
+        filters.put("http://gdauto.gdut.edu.cn/admin/login", logoutFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         // 所有请求需要认证

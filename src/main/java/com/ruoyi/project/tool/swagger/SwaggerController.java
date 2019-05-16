@@ -17,16 +17,16 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/admin/tool/swagger")
 public class SwaggerController extends BaseController
 {
-//    @RequiresPermissions("tool:swagger:view")
-//    @GetMapping()
-//    public String index()
-//    {
-//        return redirect("http://gdauto.gdut.edu.cn"+"/swagger-ui.html");
-//    }
-
     @RequiresPermissions("tool:swagger:view")
     @GetMapping()
-    public ModelAndView swagger() {
-        return new ModelAndView(new RedirectView("/swagger-ui.html"));
+    public String index()
+    {
+        return redirect("http://gdauto.gdut.edu.cn"+"/swagger-ui.html");
     }
+
+//    @RequiresPermissions("tool:swagger:view")
+//    @GetMapping()
+//    public ModelAndView swagger() {
+//        return new ModelAndView(new RedirectView("/swagger-ui.html"));
+//    }
 }

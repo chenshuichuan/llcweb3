@@ -19,16 +19,16 @@ public class DruidController extends BaseController
 {
     private String prefix = "/monitor/druid";
 
-//    @RequiresPermissions("monitor:data:view")
-//    @GetMapping()
-//    public String index()
-//    {
-//        return redirect("http://gdauto.gdut.edu.cn"+prefix + "/index");
-//    }
-
     @RequiresPermissions("monitor:data:view")
     @GetMapping()
-    public ModelAndView swagger() {
-        return new ModelAndView(new RedirectView(prefix + "/index"));
+    public String index()
+    {
+        return redirect("http://gdauto.gdut.edu.cn"+prefix + "/index");
     }
+
+//    @RequiresPermissions("monitor:data:view")
+//    @GetMapping()
+//    public ModelAndView swagger() {
+//        return new ModelAndView(new RedirectView(prefix + "/index"));
+//    }
 }

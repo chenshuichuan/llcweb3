@@ -1,5 +1,6 @@
 package com.ruoyi.project.llc.software.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -37,6 +38,7 @@ public class Software extends BaseEntity {
     /**
      * 申请日
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     @Column(name = "appli_date" )
     @Excel(name = "申请日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date appliDate;
@@ -73,6 +75,7 @@ public class Software extends BaseEntity {
     /**
      * 公开日
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     @Column(name = "public_date" )
     @Excel(name = "公开日", width = 30, dateFormat = "yyyy-MM-dd")
     private Date publicDate;

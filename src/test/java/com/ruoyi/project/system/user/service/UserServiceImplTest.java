@@ -90,4 +90,13 @@ public class UserServiceImplTest {
             }
         }
     }
+
+    @Test
+    public void resetPassw(){
+        User user = userService.selectUserByLoginName("admin");
+        if(user != null){
+            user.setPassword("llcweb123");
+            userService.resetUserPwd(user);
+        }
+    }
 }

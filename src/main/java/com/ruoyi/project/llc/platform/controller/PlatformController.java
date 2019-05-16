@@ -136,4 +136,11 @@ public class PlatformController extends BaseController {
     public ModelAndView gaofen() {
         return new ModelAndView(new RedirectView("http://gdauto.gdut.edu.cn/gaofen/"));
     }
+    /**
+     *
+     * */
+    @GetMapping("/hpcomputing")
+    public ModelAndView HPComputing() {
+        return new ModelAndView(new RedirectView("http://gdauto.gdut.edu.cn/hpcomputing/"));
+    }
 }
