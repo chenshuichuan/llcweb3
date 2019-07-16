@@ -17,3 +17,5 @@ logs/*
 admin.iml___jb_tmp___
 .classpath
 admin.git/*
+.txt
+sql
